@@ -7,7 +7,7 @@ class UsuarioDAO {
     public function validar_credenciales($correo, $contrasena) {
         $conexion =Conexion();
         try {
-            $consulta = "SELECT * FROM usuarios WHERE correo=:correo AND contrasena=:contrasena";
+            $consulta = "SELECT * FROM usuarios WHERE email=:correo AND contraseña=:contrasena";
             $sentencia = $conexion->prepare($consulta);
             $sentencia->bindParam(':correo', $correo, PDO::PARAM_STR);
             $sentencia->bindParam(':contrasena', $contrasena, PDO::PARAM_STR);
