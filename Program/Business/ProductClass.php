@@ -20,7 +20,7 @@ class Product {
             return $this->product_name;
         }
 
-        public 
+         
 
     //setters
 
