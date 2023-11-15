@@ -20,9 +20,32 @@ class Product {
             return $this->product_name;
         }
 
-         
+        public function getDescription()
+        {
+            return $this->description;
+        }
+
+        public function getPrice()
+        {
+            return $this->price;
+        }
 
     //setters
+
+        public function setProductName($productName)
+        {
+            $this->product_name=$productName;
+        }
+
+        public function setDescription($description)
+        {
+            $this->description =$description;
+        }
+
+        public function setPrice($price)
+        {
+            $this->price=$price;
+        }
 
     //methods
 }
