@@ -15,7 +15,7 @@ class UsuarioDAO {
 
             $resultado = $sentencia->fetch(PDO::FETCH_ASSOC);
 
-            return !empty($resultado); // Devuelve true si se encuentra al menos un resultado
+            return $resultado;
         } catch (PDOException $e) {
             die("Error al ejecutar la consulta: " . $e->getMessage());
         }

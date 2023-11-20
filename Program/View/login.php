@@ -4,13 +4,14 @@ session_start();
 require_once '../Business/UsuarioServicio.php';
 
 if (isset($_POST['submit'])) {
-    $correo = $_POST['correo'];
-    $contrasena = $_POST['contrasena'];
+    
+    
+    $data = iniciar_sesion($_POST['correo'], $_POST['contrasena']);
+    if ($data) {
+        $_SESSION['usu_id'] = $data->getId();
+        $_SESSION['usu_nombre'] = $data->getNombre();
+        $_SESSION['usu_correo'] = $data->getCorreo();
 
-    $usuario_servicio = new UsuarioServicio();
-
-    if ($usuario_servicio->iniciar_sesion($correo, $contrasena)) {
-        $_SESSION['correo'] = $correo;
         header("Location: index.php");
     } else {
         $error = "Correo o contraseña incorrectos.";
