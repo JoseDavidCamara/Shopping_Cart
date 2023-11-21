@@ -9,6 +9,7 @@ if (!isset($_SESSION['usu_nombre'])) {
 else{
     echo $_SESSION['usu_nombre'];
 }
+echo "<button><a href=\"logout.php\">Cerrar sesión</a></button>";
 
 
 $listado=arrayClass();
