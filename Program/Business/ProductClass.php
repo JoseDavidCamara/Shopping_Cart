@@ -64,7 +64,7 @@ function arrayClass()
     $listProductoClases = [];
 
     //Iterate through the list to get the values of each product and add it to a new Class
-//Pasa el resultado de la consulta a una lista de la clase producto
+    //Pasa el resultado de la consulta a una lista de la clase producto
     while ($registro = $consulta->fetch()) {
         $product = new Product($registro['id_producto'], $registro['nombre_producto'], $registro['descripcion'], $registro['precio']);
         array_push($listProductoClases, $product);
