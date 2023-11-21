@@ -57,10 +57,10 @@ class Product
  the split in 4 position to take the values of each product
 */
 
-function arrayClass()
+function arrayClass($fNombre = null, $fMaxP = null, $fMinP = null)
 {
     //The first step is get the list from ProductosDao();
-    $consulta = devolver_productos();
+    $consulta = devolver_productos($fNombre, $fMaxP, $fMinP);
     $listProductoClases = [];
 
     //Iterate through the list to get the values of each product and add it to a new Class
