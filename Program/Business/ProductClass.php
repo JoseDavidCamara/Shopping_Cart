@@ -4,10 +4,10 @@ class Product
 {
 
     public function __construct(
-        protected int $id,
-        protected string $product_name,
-        protected string $description,
-        protected float $price,
+        public int $id,
+        public string $product_name,
+        public string $description,
+        public float $price,
     ) {
     }
 
