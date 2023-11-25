@@ -1,4 +1,4 @@
-//Falta el toal que se vaya actualizando, y el checkout
+//Falta el toal que se vaya actualizando, y el checkout impedir que se añadan duplicados en la lista del carrito
 <!DOCTYPE html>
 <html lang="en">
 
