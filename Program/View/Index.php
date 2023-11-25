@@ -18,14 +18,14 @@ $listado = arrayClass(
     isset($_GET['precio_max']) ? $_GET['precio_max'] : null,
     isset($_GET['precio_min']) ? $_GET['precio_min'] : null
 );
-
+/*
 foreach ($listado as $item) {
     echo "Nombre del producto: " . $item->getName() . "<br>";
     echo "Descripción del producto: " . $item->getDescription() . "<br>";
     echo "Precio del producto: " . $item->getPrice() . "<br><br><br>";
 }
 
-
+*/
 if(isset($_SESSION["carrito"])) {
     $carrito = $_SESSION["carrito"];
 
@@ -54,15 +54,7 @@ if(isset($_SESSION["carrito"])) {
     <title>Mi Tienda en Línea</title>
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
-    <style>
-            .sticky-sidebar {
-                position: -webkit-sticky;
-            position: sticky;
-            top: 0;
-            z-index: 1000; /* Ajusta según tus necesidades */
-            transition: top 0.3s; /* Agregamos una transición para suavizar el movimiento */
-        }
-    </style>
+   
 </head>
 <body>
 <!-- Menú de navegación -->
@@ -77,7 +69,7 @@ if(isset($_SESSION["carrito"])) {
                 <a class="nav-link" href="#">Inicio</a>
             </li>
             <li class="nav-item">
-                <a class="nav-link" href="../View/formPago.php"><i class="fa fa-shopping-cart" style="font-size:24px"></i></a>
+                <a class="nav-link" href="../View/vercarrito.php"><i class="fa fa-shopping-cart" style="font-size:24px"></i></a>
             </li>
             <li class="nav-item">
             <a class="nav-link" href="../View/logout.php">
