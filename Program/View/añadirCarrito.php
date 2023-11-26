@@ -9,19 +9,36 @@ if ($_SERVER["REQUEST_METHOD"] === "GET") {
         $item = json_decode(urldecode($itemCifrado), true);
         // Crear una nueva instancia de la clase Product
 
+
         
         $product = new Product($item['id'], $item['product_name'], $item['description'], $item['price']);
 
-        if(isset($_SESSION["carrito"])) {
+        if (isset($_SESSION["carrito"])) {
             $carrito = $_SESSION["carrito"];
+        
+            // Evitar duplicado
+            $productAlreadyInCart = false;
+        
+            foreach ($carrito as $key => $item) {
+                $listitem = unserialize($item);
+        
+                if ($product->product_name == $listitem->product_name) {
+                    unset($_SESSION["carrito"][$key]);
+                    $productAlreadyInCart = true;
+                    break;
+                }
+            }
+        
+            // Agregar el nuevo producto solo si no está en el carrito
+            if (!$productAlreadyInCart) {
+                $carrito[] = serialize($product);
+            }
         } else {
             $carrito = array(); 
         }
         
         print_r($product);
-
-        $carrito[] = serialize($product);
-
+        
         $_SESSION["carrito"] = $carrito;
     }
 }

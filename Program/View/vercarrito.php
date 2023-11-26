@@ -1,4 +1,4 @@
-//Falta el checkout, impedir que se añadan duplicados en la lista del carrito
+//Falta el checkout, pero antes se ha de enviar los datos con el total
 <!DOCTYPE html>
 <html lang="en">
 
