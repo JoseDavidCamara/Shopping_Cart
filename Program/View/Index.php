@@ -58,27 +58,7 @@ if(isset($_SESSION["carrito"])) {
 </head>
 <body>
 <!-- Menú de navegación -->
-<nav class="navbar navbar-expand-lg navbar-dark bg-dark">
-    <a class="navbar-brand" href="#">Mi Tienda en Línea</a>
-    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
-        <span class="navbar-toggler-icon"></span>
-    </button>
-    <div class="collapse navbar-collapse" id="navbarNav">
-        <ul class="navbar-nav ml-auto">
-            <li class="nav-item">
-                <a class="nav-link" href="#">Inicio</a>
-            </li>
-            <li class="nav-item">
-                <a class="nav-link" href="../View/vercarrito.php"><i class="fa fa-shopping-cart" style="font-size:24px"></i></a>
-            </li>
-            <li class="nav-item">
-            <a class="nav-link" href="../View/logout.php">
-            <i class="fa fa-sign-out" style="font-size:20px;color:red"></i>
-                </a>
-            </li>
-        </ul>
-    </div>
-</nav>
+<?php include 'navbar.inc';?>
 
 <!-- Sección de productos y menú lateral de búsqueda -->
 <div class="container mt-3">
@@ -117,7 +97,7 @@ if(isset($_SESSION["carrito"])) {
                                 <p class='card-text'><?php echo $item->getPrice(); ?> €</p>
                                 <div class='d-flex justify-content-between align-items-center'>
                                     <div class='btn-group'>
-                                        <a class='btn btn-sm btn-outline-primary' href="añadirCarrito.php?agregarAlCarrito=<?php echo urlencode(json_encode($item)); ?>">Agregar al carrito</a>
+                                        <a class='btn btn-sm btn-outline-primary' href="añadirCarrito.php?agregarAlCarrito=<?php echo urlencode(json_encode($item)); ?>" onclick="disable">Agregar al carrito</a>
                                     </div>
                                 </div>
                             </div>
@@ -128,16 +108,7 @@ if(isset($_SESSION["carrito"])) {
         </div>
     </div>
 </div>
-<script>
-        window.onscroll = function() {
-            var sidebar = document.getElementById("sticky-sidebar");
-            if (window.pageYOffset > 20) {
-                sidebar.style.top = "20px";
-            } else {
-                sidebar.style.top = "0";
-            }
-        };
-    </script>
+
 <!-- Agrega la referencia a Bootstrap JS y Popper.js -->
 <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.6/dist/umd/popper.min.js"></script>

@@ -8,6 +8,8 @@ if ($_SERVER["REQUEST_METHOD"] === "GET") {
         $itemCifrado = $_GET["agregarAlCarrito"];
         $item = json_decode(urldecode($itemCifrado), true);
         // Crear una nueva instancia de la clase Product
+
+        
         $product = new Product($item['id'], $item['product_name'], $item['description'], $item['price']);
 
         if(isset($_SESSION["carrito"])) {
@@ -15,6 +17,7 @@ if ($_SERVER["REQUEST_METHOD"] === "GET") {
         } else {
             $carrito = array(); 
         }
+        
         print_r($product);
 
         $carrito[] = serialize($product);

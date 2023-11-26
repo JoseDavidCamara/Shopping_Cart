@@ -1,12 +1,12 @@
-//Falta el toal que se vaya actualizando, y el checkout impedir que se añadan duplicados en la lista del carrito
+//Falta el checkout, impedir que se añadan duplicados en la lista del carrito
 <!DOCTYPE html>
 <html lang="en">
 
 <head>
-    <title>View Cart - PHP Shopping Cart Tutorial</title>
+    <title>Carrito</title>
     <meta charset="utf-8">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
     <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"></script>
     <style>
@@ -60,32 +60,8 @@ if(isset($_SESSION["carrito"])) {
 }
 ?>
 
-
-    <!-- Barra de navegación mejorada -->
-    <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
-        <a class="navbar-brand" href="#">Mi Tienda</a>
-        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
-            <span class="navbar-toggler-icon"></span>
-        </button>
-        <div class="collapse navbar-collapse" id="navbarNav">
-            <ul class="navbar-nav ml-auto">
-                <li class="nav-item active">
-                    <a class="nav-link" href="#">Inicio</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="index.php">Productos</a>
-                </li>
-                <li class="nav-item">
-            <a class="nav-link" href="../View/logout.php">
-            <i class="fa fa-sign-out" style="font-size:20px;color:red"></i>
-                </a>
-            </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="#">Contacto</a>
-                </li>
-            </ul>
-        </div>
-    </nav>
+    <!-- Barra de navegación  -->
+    <?php include 'navbar.inc';?>
 
     <div class="container">
     <?php
@@ -118,7 +94,7 @@ if(isset($_SESSION["carrito"])) {
                                 <td><?php echo $product->product_name ?></td>
                                 <td> <?php echo $product->price ?> €</td>
                                 <td>
-                                <input name="cantidad" type="number" class="form-control" value="1" onchange="updateCartItem('<?php echo $product->product_name; ?>', <?php echo $product->price; ?>, this)">
+                                <input name="cantidad" type="number" class="form-control" min="1" value="1" onchange="updateCartItem('<?php echo $product->product_name; ?>', <?php echo $product->price; ?>, this)">
                                 </td>
                                 <td class='subtotal' data-product-name='<?php echo $product->product_name; ?>'><?php echo $product->price; ?> €</td>
                                 <td>
@@ -136,7 +112,7 @@ if(isset($_SESSION["carrito"])) {
                         </a>
                     </td>
                     <td colspan="2" class="text-center">
-                        <strong>Total $100 USD</strong>
+                        <strong id="total">Total</strong>
                     </td>
                     <td>
                         <a href="checkout.php" class="btn btn-success btn-block">
@@ -157,13 +133,25 @@ if(isset($_SESSION["carrito"])) {
     </div>
     
     <script>
+       let subtotals = {}; // Objeto para almacenar los subtotales de cada producto
+    
   function updateCartItem(productName, productPrice, inputElement) {
     var quantity = $(inputElement).val();
+   
+    if (quantity<=0)
+    {
+        quantity=1;
+    }
+
     var subtotal = productPrice * quantity;
 
+
+    subtotals[productName] = subtotal;
+    console.log(subtotals);
+    total(subtotals);
     // Update the corresponding subtotal cell for the product
     $(".subtotal[data-product-name='" + productName + "']").text(subtotal + ' €');
-}
+    }
 
 
 function removeCartItem(productName) {
@@ -179,7 +167,10 @@ function removeCartItem(productName) {
             success: function(data) {
                 if (data === 'ok') {
                     alert('Item removed successfully.');
+                    delete subtotals[productName];
+                        total(subtotals)
                     $(".product-row[data-product-name='" + productName + "']").remove();
+
                 } else {
                     alert('Failed to remove item. Please try again.');
                 }
@@ -191,8 +182,21 @@ function removeCartItem(productName) {
     }
 }
 
-    </script>
 
+function total(subtotal)
+{
+    let subtotalsArray = Object.values(subtotals); // Obtener un array de subtotales
+let newTotal = 0;
+
+for (let subtotal of subtotalsArray) {
+    newTotal += subtotal; // Sumar cada subtotal al nuevo total
+}
+
+// Ahora, newTotal contiene la suma de todos los subtotales
+$("#total").text('Total '+ newTotal + ' €'); // Actualizar el elemento HTML con el nuevo total
+}
+
+  </script>
 </body>
 
 </html>
