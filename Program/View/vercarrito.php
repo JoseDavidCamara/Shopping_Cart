@@ -1,6 +1,12 @@
 //Falta el checkout, pero antes se ha de enviar los datos con el total
 <!DOCTYPE html>
 <html lang="en">
+    <?php
+    session_start();
+    if (!isset($_SESSION['usu_nombre'])) {
+        header("Location: login.php");
+    }
+    ?>
 
 <head>
     <title>Carrito</title>
@@ -89,7 +95,6 @@
 
 <body>
     <?php
-    session_start();
     require_once '../Business/ProductClass.php';
     if (isset($_SESSION["carrito"])) {
         $carrito = $_SESSION["carrito"];
@@ -198,10 +203,10 @@
     <div class="overlay" id="overlay"></div>
     <div class="modal" id="modal">
         <div class="modal-content">
-            <p>¿Estás seguro de que deseas realizar esta acción?</p>
+            <p>Are you sure you want to perform this action?</p>
             <div class="btn-modal-group">
-                <button onclick="confirmAction()" class="btn-modal btn-success">Confirmar</button>
-                <button onclick="cancelAction()" class="btn-modal btn-danger">Cancelar</button>
+                <button onclick="confirmAction()" class="btn-modal btn-success">Confirm</button>
+                <button onclick="cancelAction()" class="btn-modal btn-danger">Cancel</button>
             </div>
         </div>
     </div>
