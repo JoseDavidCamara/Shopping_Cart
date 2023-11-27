@@ -1,4 +1,3 @@
-//Falta el checkout, pero antes se ha de enviar los datos con el total
 <!DOCTYPE html>
 <html lang="en">
     <?php
@@ -27,21 +26,7 @@
     if (isset($_SESSION["carrito"])) {
         $carrito = $_SESSION["carrito"];
 
-        if (empty($carrito)) {
-            echo "El carrito está vacío.";
-        } else {
-            echo "<h2>Contenido del Carrito:</h2>";
-            echo "<ul>";
-            foreach ($carrito as $item) {
-                // Deserializa el objeto Product
-                $product = unserialize($item);
-                // Accede a las propiedades del objeto Product
-                echo "<li>{$product->product_name} - {$product->description} - {$product->price} €</li>";
-            }
-            echo "</ul>";
-        }
-    } else {
-        echo "El carrito está vacío.";
+       
     }
     ?>
 
