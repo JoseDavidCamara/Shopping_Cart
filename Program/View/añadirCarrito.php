@@ -11,7 +11,7 @@ if ($_SERVER["REQUEST_METHOD"] === "GET") {
 
 
         
-        $product = new Product($item['id'], $item['product_name'], $item['description'], $item['price']);
+        $product = new Product($item['id'], $item['product_name'], $item['description'], $item['price'],1);
 
         if (isset($_SESSION["carrito"])) {
             $carrito = $_SESSION["carrito"];
@@ -22,7 +22,7 @@ if ($_SERVER["REQUEST_METHOD"] === "GET") {
             foreach ($carrito as $key => $item) {
                 $listitem = unserialize($item);
         
-                if ($product->product_name == $listitem->product_name) {
+                if ($product->getName() == $listitem->getName()) {
                     unset($_SESSION["carrito"][$key]);
                     $productAlreadyInCart = true;
                     break;

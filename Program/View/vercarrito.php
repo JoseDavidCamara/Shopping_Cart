@@ -25,7 +25,6 @@
     require_once '../Business/ProductClass.php';
     if (isset($_SESSION["carrito"])) {
         $carrito = $_SESSION["carrito"];
-
        
     }
     ?>
@@ -35,8 +34,6 @@
 
     <div class="container">
         <?php
-
-        require_once '../Business/ProductClass.php';
         if (isset($_SESSION["carrito"])) {
             $carrito = $_SESSION["carrito"];
 
@@ -65,22 +62,23 @@
                                 $product = unserialize($item);
                                 // Accede a las propiedades del objeto Product
                             ?>
-                                <tr class="product-row" data-product-name='<?php echo $product->product_name; ?>'>
+                                <tr class="product-row" data-product-name='<?php echo $product->getName(); ?>'>
 
                                     <td>
-                                        <?php echo $product->product_name ?>
+                                        <?php echo $product->getName(); ?>
                                     </td>
                                     <td>
-                                        <?php echo $product->price ?> €
+                                        <?php echo $product->getPrice(); ?> €
+                                    </td>
+                                  
+                                    <td>
+                                        <input name="cantidad" type="number" class="form-control" min="1" value='<?php echo $product->getQuantity(); ?>' onchange="updateCartItem('<?php echo $product->getName(); ?>', <?php echo $product->getPrice(); ?>, this)">
+                                    </td>
+                                    <td class='subtotal' data-product-name='<?php echo $product->getName(); ?>'>
+                                        <?php echo $product->getPrice(); ?> €
                                     </td>
                                     <td>
-                                        <input name="cantidad" type="number" class="form-control" min="1" value="1" onchange="updateCartItem('<?php echo $product->product_name; ?>', <?php echo $product->price; ?>, this)">
-                                    </td>
-                                    <td class='subtotal' data-product-name='<?php echo $product->product_name; ?>'>
-                                        <?php echo $product->price; ?> €
-                                    </td>
-                                    <td>
-                                        <a href="#" class="btn btn-danger" onclick="removeCartItem('<?php echo $product->product_name; ?>'); return false;">
+                                        <a href="#" class="btn btn-danger" onclick="removeCartItem('<?php echo $product->getName(); ?>'); return false;">
                                             <i class="glyphicon glyphicon-trash"></i> Remove
                                         </a>
                                     </td>

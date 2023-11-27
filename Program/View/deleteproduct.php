@@ -11,7 +11,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         foreach ($_SESSION["carrito"] as $key => $item) {
             $product = unserialize($item);
 
-            if ($product->product_name == $removedProductName) {
+            if ($product->getName() == $removedProductName) {
                 unset($_SESSION["carrito"][$key]);
                 $itemRemoved = true;
                 break;

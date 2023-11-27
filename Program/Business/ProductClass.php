@@ -8,11 +8,13 @@ class Product
         public string $product_name,
         public string $description,
         public float $price,
+        public int $quantity,
     ) {
     }
 
 
     //getters
+    
     public function getID()
     {
         return $this->id;
@@ -33,6 +35,11 @@ class Product
         return $this->price;
     }
 
+    public function getQuantity()
+    {
+        return $this->quantity;
+    }
+
     //setters
 
     public function setProductName($productName)
@@ -50,12 +57,15 @@ class Product
         $this->price = $price;
     }
 
+    public function setQuantity($quantity)
+    {
+        $this->quantity = $quantity;
+    }
+
     //methods
 }
 
-/*now i have to take the list from de ProductosDAO, i make 
- the split in 4 position to take the values of each product
-*/
+
 
 function arrayClass($fNombre = null, $fMaxP = null, $fMinP = null)
 {
@@ -66,7 +76,7 @@ function arrayClass($fNombre = null, $fMaxP = null, $fMinP = null)
     //Iterate through the list to get the values of each product and add it to a new Class
     //Pasa el resultado de la consulta a una lista de la clase producto
     while ($registro = $consulta->fetch()) {
-        $product = new Product($registro['id_producto'], $registro['nombre_producto'], $registro['descripcion'], $registro['precio']);
+        $product = new Product($registro['id_producto'], $registro['nombre_producto'], $registro['descripcion'], $registro['precio'],1);
         array_push($listProductoClases, $product);
     }
     //return the new list with the classes

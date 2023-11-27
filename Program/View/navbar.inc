@@ -6,7 +6,7 @@
     <div class="collapse navbar-collapse" id="navbarNav">
         <ul class="navbar-nav ml-auto">
             <li class="nav-item">
-                <a class="nav-link" href="#">Inicio</a>
+                <a class="nav-link" href="index.php">Inicio</a>
             </li>
             <li class="nav-item">
                 <a class="nav-link" href="../View/vercarrito.php"><i class="fa fa-shopping-cart" style="font-size:24px"></i></a>
