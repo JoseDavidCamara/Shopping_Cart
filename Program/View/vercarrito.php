@@ -1,4 +1,3 @@
-//Falta el checkout, pero antes se ha de enviar los datos con el total
 <!DOCTYPE html>
 <html lang="en">
     <?php
@@ -15,82 +14,7 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
     <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"></script>
-    <style>
-        body {
-            background-color: #f8f9fa;
-
-        }
-
-        .container {
-            padding: 50px;
-        }
-
-        input[type="number"] {
-            width: 70px;
-            text-align: center;
-        }
-
-        th,
-        td {
-            text-align: center;
-        }
-
-        .table {
-            background-color: #fff;
-        }
-
-        .overlay {
-            display: none;
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background-color: rgba(0, 0, 0, 0.5);
-            z-index: 999;
-        }
-
-        .modal {
-            display: none;
-            position: fixed;
-            width: 400px;
-            height: 150px;
-            background-color: #fff;
-            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-            z-index: 1000;
-            top: 50%;
-            left: 50%;
-            transform: translate(-50%, -50%);
-            border-radius: 4px;
-
-        }
-
-        .modal-content {
-            margin-top: 10px;
-            text-align: center;
-            border: 0px;
-        }
-
-        .btn-modal {
-
-            padding: 10px 20px;
-            text-decoration: none;
-            border-radius: 4px;
-            cursor: pointer;
-            margin-top: 10px;
-        }
-
-        .btn-modal-group {
-            display: flex;
-            justify-content: center;
-            margin-top: 10px;
-        }
-
-        .btn-modal-group button {
-            margin: 0 5px;
-        }
-    </style>
-
+    <link rel="stylesheet" href="resources/css/carrito.css">
 </head>
 
 <body>
@@ -211,88 +135,7 @@
         </div>
     </div>
 
-    <script>
-        let subtotals = {}; // Objeto para almacenar los subtotales de cada producto
-
-        function updateCartItem(productName, productPrice, inputElement) {
-            var quantity = $(inputElement).val();
-
-            if (quantity <= 0) {
-                quantity = 1;
-            }
-
-            var subtotal = productPrice * quantity;
-
-
-            subtotals[productName] = subtotal;
-            console.log(subtotals);
-            total(subtotals);
-            // Update the corresponding subtotal cell for the product
-            $(".subtotal[data-product-name='" + productName + "']").text(subtotal + ' €');
-        }
-
-
-        function removeCartItem(productName) {
-            var confirmation = confirm('Are you sure you want to remove this item?');
-            if (confirmation) {
-                $.ajax({
-                    type: "POST",
-                    url: "deleteproduct.php",
-                    data: {
-                        action: "removeCartItem",
-                        name: productName
-                    },
-                    success: function(data) {
-                        if (data === 'ok') {
-                            alert('Item removed successfully.');
-                            delete subtotals[productName];
-                            total(subtotals)
-                            $(".product-row[data-product-name='" + productName + "']").remove();
-
-                        } else {
-                            alert('Failed to remove item. Please try again.');
-                        }
-                    },
-                    error: function() {
-                        alert('Error in Ajax request.');
-                    }
-                });
-            }
-        }
-
-
-        function total(subtotal) {
-            let subtotalsArray = Object.values(subtotals); // Obtener un array de subtotales
-            let newTotal = 0;
-
-            for (let subtotal of subtotalsArray) {
-                newTotal += subtotal; // Sumar cada subtotal al nuevo total
-            }
-
-            // Ahora, newTotal contiene la suma de todos los subtotales
-            $("#total").text('Total ' + newTotal + ' €'); // Actualizar el elemento HTML con el nuevo total
-        }
-
-        function openModal() {
-            document.getElementById("modal").style.display = "block";
-            document.getElementById("overlay").style.display = "block";
-        }
-
-        function closeModal() {
-            document.getElementById("modal").style.display = "none";
-            document.getElementById("overlay").style.display = "none";
-        }
-
-        function confirmAction() {
-            // Aquí puedes agregar la lógica de PHP para confirmar la acción
-            closeModal();
-        }
-
-        function cancelAction() {
-            // Aquí puedes agregar la lógica de PHP para cancelar la acción
-            closeModal();
-        }
-    </script>
+    <script src="resources/js/carrito.js"></script>
 </body>
 
 </html>

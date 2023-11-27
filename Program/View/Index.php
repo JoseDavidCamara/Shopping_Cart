@@ -18,33 +18,26 @@ $listado = arrayClass(
     isset($_GET['precio_max']) ? $_GET['precio_max'] : null,
     isset($_GET['precio_min']) ? $_GET['precio_min'] : null
 );
-/*
-foreach ($listado as $item) {
-    echo "Nombre del producto: " . $item->getName() . "<br>";
-    echo "Descripción del producto: " . $item->getDescription() . "<br>";
-    echo "Precio del producto: " . $item->getPrice() . "<br><br><br>";
-}
 
-*/
-if(isset($_SESSION["carrito"])) {
-    $carrito = $_SESSION["carrito"];
+// if(isset($_SESSION["carrito"])) {
+//     $carrito = $_SESSION["carrito"];
 
-    if(empty($carrito)) {
-        echo "El carrito está vacío.";
-    } else {
-        echo "<h2>Contenido del Carrito:</h2>";
-        echo "<ul>";
-        foreach($carrito as $item) {
-            // Deserializa el objeto Product
-            $product = unserialize($item);
-            // Accede a las propiedades del objeto Product
-            echo "<li>{$product->product_name} - {$product->description} - {$product->price} €</li>";
-        }
-        echo "</ul>";
-    }
-} else {
-    echo "El carrito está vacío.";
-}
+//     if(empty($carrito)) {
+//         echo "El carrito está vacío.";
+//     } else {
+//         echo "<h2>Contenido del Carrito:</h2>";
+//         echo "<ul>";
+//         foreach($carrito as $item) {
+//             // Deserializa el objeto Product
+//             $product = unserialize($item);
+//             // Accede a las propiedades del objeto Product
+//             echo "<li>{$product->product_name} - {$product->description} - {$product->price} €</li>";
+//         }
+//         echo "</ul>";
+//     }
+// } else {
+//     echo "El carrito está vacío.";
+// }
 ?>
 <!DOCTYPE html>
 <html lang="es">
