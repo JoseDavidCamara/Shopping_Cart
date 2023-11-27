@@ -90,7 +90,7 @@ $listado = arrayClass(
                                 <p class='card-text'><?php echo $item->getPrice(); ?> €</p>
                                 <div class='d-flex justify-content-between align-items-center'>
                                     <div class='btn-group'>
-                                        <a class='btn btn-sm btn-outline-primary' href="añadirCarrito.php?agregarAlCarrito=<?php echo urlencode(json_encode($item)); ?>" onclick="disable">Agregar al carrito</a>
+                                        <a class='btn btn-sm btn-outline-primary' href="añadirCarrito.php?agregarAlCarrito=<?php echo urlencode(json_encode($item)); ?>">Agregar al carrito</a>
                                     </div>
                                 </div>
                             </div>

@@ -1,3 +1,4 @@
+//Falta el checkout, pero antes se ha de enviar los datos con el total
 <!DOCTYPE html>
 <html lang="en">
     <?php
@@ -12,9 +13,12 @@
     <meta charset="utf-8">
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link rel="stylesheet" href="resources/css/carrito.css">
     <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"></script>
-    <link rel="stylesheet" href="resources/css/carrito.css">
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.6/dist/umd/popper.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
+    <script src="resources/js/carrito.js"></script>
 </head>
 
 <body>
@@ -135,7 +139,8 @@
         </div>
     </div>
 
-    <script src="resources/js/carrito.js"></script>
+    
+    
 </body>
 
 </html>
