@@ -79,9 +79,10 @@
             justify-content: center;
             margin-top: 10px;
         }
+
         .btn-modal-group button {
-        margin: 0 5px;
-    }
+            margin: 0 5px;
+        }
     </style>
 
 </head>
@@ -122,10 +123,13 @@
             $carrito = $_SESSION["carrito"];
 
             if (empty($carrito)) {
-        ?> <tr>
-                    <h1>El carrito está vacío</h1> <?php
-                                                } else {
-                                                    ?> <h1 class="text-center">Shopping Cart</h1>
+        ?>
+                <tr>
+                    <h1>El carrito está vacío</h1>
+                <?php
+            } else {
+                ?>
+                    <h1 class="text-center">Shopping Cart</h1>
                     <table class="table table-bordered">
                         <thead>
                             <tr>
@@ -136,25 +140,34 @@
                                 <th>Action</th>
                             </tr>
                         </thead>
-                        <tbody> <?php
-                                                    foreach ($carrito as $item) {
-                                                        // Deserializa el objeto Product
-                                                        $product = unserialize($item);
-                                                        // Accede a las propiedades del objeto Product
-                                ?><tr class="product-row" data-product-name='<?php echo $product->product_name; ?>'>
+                        <tbody>
+                            <?php
+                            foreach ($carrito as $item) {
+                                // Deserializa el objeto Product
+                                $product = unserialize($item);
+                                // Accede a las propiedades del objeto Product
+                            ?>
+                                <tr class="product-row" data-product-name='<?php echo $product->product_name; ?>'>
 
-                                    <td><?php echo $product->product_name ?></td>
-                                    <td> <?php echo $product->price ?> €</td>
+                                    <td>
+                                        <?php echo $product->product_name ?>
+                                    </td>
+                                    <td>
+                                        <?php echo $product->price ?> €
+                                    </td>
                                     <td>
                                         <input name="cantidad" type="number" class="form-control" min="1" value="1" onchange="updateCartItem('<?php echo $product->product_name; ?>', <?php echo $product->price; ?>, this)">
                                     </td>
-                                    <td class='subtotal' data-product-name='<?php echo $product->product_name; ?>'><?php echo $product->price; ?> €</td>
+                                    <td class='subtotal' data-product-name='<?php echo $product->product_name; ?>'>
+                                        <?php echo $product->price; ?> €
+                                    </td>
                                     <td>
                                         <a href="#" class="btn btn-danger" onclick="removeCartItem('<?php echo $product->product_name; ?>'); return false;">
                                             <i class="glyphicon glyphicon-trash"></i> Remove
                                         </a>
                                     </td>
-                                </tr> <?php } ?>
+                                </tr>
+                            <?php } ?>
                         </tbody>
                         <tfoot>
                             <tr>
@@ -175,10 +188,10 @@
                         </tfoot>
                     </table>
             <?php
-                                                }
-                                            } else {
-                                                echo "El carrito está vacío.";
-                                            }
+            }
+        } else {
+            echo "El carrito está vacío.";
+        }
             ?>
 
     </div>
