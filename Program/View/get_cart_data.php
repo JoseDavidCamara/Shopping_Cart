@@ -1,6 +1,10 @@
 <?php
 session_start();
+if (!isset($_SESSION['usu_nombre'])) {
+    header("Location: login.php");
+}
 require_once '../Business/ProductClass.php';
+//In this code save the price and quantity of each product to send it to the window.onload function() in carrito.js
 if (isset($_SESSION["carrito"])) {
     $carrito = $_SESSION["carrito"];
 
@@ -8,10 +12,9 @@ if (isset($_SESSION["carrito"])) {
     $prices = array();
 
     foreach ($carrito as $item) {
-        // Deserializa el objeto Product
+        // Deserializae obect product
         $product = unserialize($item);
-
-        // Accede a las propiedades del objeto Product
+        //Acced to the Product object properties
         $quantities[$product->getName()] = $product->getQuantity();
         $prices[$product->getName()] = $product->getPrice();
     }

@@ -1,11 +1,15 @@
 <?php
 session_start();
+if (!isset($_SESSION['usu_nombre'])) {
+    header("Location: login.php");
+}
 require_once '../Business/ProductClass.php';
 
+//In this code are recived the name and value of each product that is updated in vercarrito.php using carrito.js function called updateCartItem
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
     if ($_POST["action"] == "updateCartItem") {
         $updatedProductName = $_POST['name'];
-        $updatedQuantity = $_POST['value'];
+        $updatedQuantity = $_POST['value'];  //This is th value of the input
 
         $itemUpdated = false;
 
@@ -13,10 +17,10 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             $product = unserialize($item);
 
             if ($product->getName() == $updatedProductName) {
-                // Actualizar la cantidad del producto
+                // Update the quanity of the product
                 $product->setQuantity($updatedQuantity);
 
-                // Volver a serializar y actualizar el elemento en la sesión
+                //Serialize again and update the product in the $_SESSION
                 $_SESSION["carrito"][$key] = serialize($product);
 
                 $itemUpdated = true;
@@ -25,9 +29,9 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         }
 
         if ($itemUpdated) {
-            echo 'ok'; // Enviar una respuesta de éxito
+            echo 'ok'; // send a satisfactory response 
         } else {
-            echo 'error'; // Enviar una respuesta de error si el producto no se encuentra en el carrito
+            echo 'error'; // Send an error message if the product doesnt exist in the shopping cart 
         }
     }
 }

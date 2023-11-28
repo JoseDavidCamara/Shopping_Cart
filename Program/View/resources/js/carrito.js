@@ -1,6 +1,7 @@
 
     let subtotals = {}; // Objeto para almacenar los subtotales de cada producto
 
+    //This portion of code allow to save the quantity and calculate the price when a page is reloaded 
     window.onload = function () {
         // Fetch quantities and prices from the server (PHP session)
         $.ajax({
@@ -52,6 +53,7 @@
 
 
         
+        // Thihs portion of code saves the input value of each product
             $.ajax({
                 type: "POST",
                 url: "updateproduct.php",
