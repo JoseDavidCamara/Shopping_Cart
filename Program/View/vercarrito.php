@@ -1,11 +1,11 @@
 <!DOCTYPE html>
 <html lang="en">
-    <?php
-    session_start();
-    if (!isset($_SESSION['usu_nombre'])) {
-        header("Location: login.php");
-    }
-    ?>
+<?php
+session_start();
+if (!isset($_SESSION['usu_nombre'])) {
+    header("Location: login.php");
+}
+?>
 
 <head>
     <title>Carrito</title>
@@ -23,9 +23,9 @@
 <body>
     <?php
     require_once '../Business/ProductClass.php';
+    require_once '../Business/PedidoClass.php';
     if (isset($_SESSION["carrito"])) {
         $carrito = $_SESSION["carrito"];
-       
     }
     ?>
 
@@ -70,7 +70,7 @@
                                     <td>
                                         <?php echo $product->getPrice(); ?> €
                                     </td>
-                                  
+
                                     <td>
                                         <input name="cantidad" type="number" class="form-control" min="1" value='<?php echo $product->getQuantity(); ?>' onchange="updateCartItem('<?php echo $product->getName(); ?>', <?php echo $product->getPrice(); ?>, this)">
                                     </td>
@@ -116,14 +116,22 @@
         <div class="modal-content">
             <p>Are you sure you want to perform this action?</p>
             <div class="btn-modal-group">
-                <button onclick="confirmAction()" class="btn-modal btn-success">Confirm</button>
+                <form method="post" action="vercarrito.php">
+                    <button onclick="confirmAction()" type="submit" name="miBoton" class="btn-modal btn-success">Confirm</button>
+                </form>
                 <button onclick="cancelAction()" class="btn-modal btn-danger">Cancel</button>
             </div>
         </div>
     </div>
-
-    
-    
 </body>
+<?php
 
+if ($_SERVER["REQUEST_METHOD"] === "POST" && isset($_POST["miBoton"])) {
+    añadirPedido($_SESSION['usu_id'],$carrito);
+    unset($_SESSION["carrito"]);
+
+}
+
+
+?>
 </html>

@@ -8,6 +8,9 @@
             <li class="nav-item">
                 <a class="nav-link" href="index.php">Inicio</a>
             </li>
+             <li class="nav-item">
+                <span class="nav-link"><?php echo $_SESSION['usu_nombre']; ?></span>
+            </li>
             <li class="nav-item">
                 <a class="nav-link" href="../View/vercarrito.php"><i class="fa fa-shopping-cart" style="font-size:24px"></i></a>
             </li>

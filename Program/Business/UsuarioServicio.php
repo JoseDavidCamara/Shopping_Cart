@@ -25,5 +25,5 @@ class UsuarioServicio {
 function iniciar_sesion($correo, $contrasena) {
     $usuario_dao = new UsuarioDAO();
      $data = $usuario_dao->validar_credenciales($correo, $contrasena);
-    return new UsuarioServicio($data['id'], $data['nombre'], $data['email']);
+    return new UsuarioServicio($data['id_usuario'], $data['nombre'], $data['email']);
 }
