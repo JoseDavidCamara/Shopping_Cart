@@ -38,3 +38,34 @@ function añadirProductosAlPedido($idPedido, $idProducto , $cantidad)
     
     $conexion = null;
 }
+
+function ordersList($user_id)
+{
+    try {
+    $conexion = Conexion();
+    $param[':nombre'] = "%$user_id%";
+    $sql = "SELECT* FROM pedidos WHERE id_usuario=:nombre";
+
+    // Prepare the SQL statement
+    $stmt = $conexion->prepare($sql);
+    
+    // Bind the parameter
+    $stmt->bindParam(':idUsuario', $user_id, PDO::PARAM_INT);
+    
+    // Execute the query
+    $stmt->execute();
+    
+    $conexion = null;
+
+    // Fetch the results
+    $result = $stmt->fetchAll(PDO::FETCH_ASSOC);
+
+    return $result;
+    }
+    catch (PDOException $e) {
+        echo "Error al sacar el id de usuario: " . $e->getMessage();
+    }finally  {
+        $conexion = null;
+    }  
+
+}

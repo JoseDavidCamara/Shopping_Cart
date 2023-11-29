@@ -2,10 +2,33 @@
 require_once('../DataAccess/PedidosDAO.php');
 class Pedido
 {
-    private $id_pedido;
-    private $id_usuario;
-    private $fecha_pedido;
+  
+    public function __construct(
+        public $order_id,
+        public $user_id,
+        public $order_date,
+    
+    ){}
+
+    public function getOrderId()
+    {
+        return $this->order_id;
+    }
+
+    public function getUserId()
+    {
+        return $this->user_id;
+    }
+
+    public function getOrderDate()
+    {
+        return $this->order_date;
+    }
+    
+    
 }
+
+
 
 function añadirPedido($id_usu, $carrito)
 {
@@ -17,4 +40,16 @@ function añadirPedido($id_usu, $carrito)
             añadirProductosAlPedido($id_pedido, $product->getID(), $product->getQuantity());
         }
     }
+}
+
+function BusinessOrderList($user_id)
+{
+   $consulta= ordersList($user_id);
+   $ordersList=[];
+
+   while($registro=$consulta->fetch()){
+    // orders
+   }
+
+
 }
