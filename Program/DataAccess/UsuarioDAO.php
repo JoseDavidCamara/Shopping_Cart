@@ -21,9 +21,10 @@ class UsuarioDAO {
         }
     }
 
-    public function insertar_usuario($nombre, $email, $contrasena) {
+    function insertar_usuario($nombre, $email, $contrasena) {
         $conexion = Conexion();
         try {
+            // Verificar si el usuario ya existe antes de insertar
             $consulta_verificar = "SELECT COUNT(*) as total FROM usuarios WHERE email=:email";
             $sentencia_verificar = $conexion->prepare($consulta_verificar);
             $sentencia_verificar->bindParam(':email', $email, PDO::PARAM_STR);
@@ -32,7 +33,8 @@ class UsuarioDAO {
             $resultado_verificar = $sentencia_verificar->fetch(PDO::FETCH_ASSOC);
     
             if ($resultado_verificar['total'] > 0) {
-                return false;
+                // El usuario ya existe, lanzar una excepción con un mensaje específico
+                throw new Exception("El correo electrónico ya está registrado.");
             }
     
             $consulta_insertar = "INSERT INTO usuarios (nombre, email, contraseña) VALUES (:nombre, :email, :contrasena)";
@@ -42,7 +44,7 @@ class UsuarioDAO {
             $sentencia_insertar->bindParam(':contrasena', $contrasena, PDO::PARAM_STR);
             $sentencia_insertar->execute();
     
-            return true;
+            return true; // Usuario insertado correctamente
         } catch (PDOException $e) {
             die("Error al ejecutar la consulta: " . $e->getMessage());
         }

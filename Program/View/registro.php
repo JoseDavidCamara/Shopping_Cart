@@ -4,11 +4,19 @@ require_once '../Business/UsuarioServicio.php';
 
 if (isset($_POST['submit'])) {
     try {
-        CrearUsuario($_POST['nombre'], $_POST['correo'], $_POST['contrasena']);
-        header("Location: login.php");
-    } catch (Exception $e) {
+        $nombre = $_POST['nombre'];
+        $correo = $_POST['correo'];
+        $contrasena = $_POST['contrasena'];
 
-        $error = "Los datos proporcionados no tienen el formato correcto.";
+        if (filter_var($correo, FILTER_VALIDATE_EMAIL) && !empty($nombre) && !empty($contrasena)) {
+            CrearUsuario($nombre, $correo, $contrasena);
+            header("Location: login.php?registro=exitoso");
+            exit();
+        } else {
+            throw new Exception("Los datos proporcionados no tienen el formato correcto.");
+        }
+    } catch (Exception $e) {
+        $error = $e->getMessage();
     }
 }
 ?>
