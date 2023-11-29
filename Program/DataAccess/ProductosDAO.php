@@ -16,16 +16,25 @@ function devolver_productos($fNombre = null, $fMaxP = null, $fMinP = null)
             $query .= " WHERE nombre_producto LIKE :nombre";
             $params[':nombre'] = "%$fNombre%";
         }
-
-        if (!empty($fMaxP) && !empty($fMinP)) {
+        
+        if (!empty($fMaxP) || !empty($fMinP)) {
             if (!empty($fNombre)) {
                 $query .= " AND";
             } else {
                 $query .= " WHERE";
             }
-            $query .= " precio BETWEEN :min_precio AND :max_precio";
-            $params[':min_precio'] = $fMinP;
-            $params[':max_precio'] = $fMaxP;
+        
+            if (!empty($fMinP) && !empty($fMaxP)) {
+                $query .= " precio BETWEEN :min_precio AND :max_precio";
+                $params[':min_precio'] = $fMinP;
+                $params[':max_precio'] = $fMaxP;
+            } elseif (!empty($fMinP)) {
+                $query .= " precio >= :min_precio";
+                $params[':min_precio'] = $fMinP;
+            } elseif (!empty($fMaxP)) {
+                $query .= " precio <= :max_precio";
+                $params[':max_precio'] = $fMaxP;
+            }
         }
 
         $consulta = $conexion->prepare($query);
@@ -42,6 +51,3 @@ function devolver_productos($fNombre = null, $fMaxP = null, $fMinP = null)
         die("Error al ejecutar la consulta: " . $e->getMessage());
     }
 }
-
-  
-//dDEspues de mostrar el producto , añadir un array d sesion lo de añadir el producto cada vez que presionas un producto y después hacer modificar cantidad
