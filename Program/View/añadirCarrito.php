@@ -11,7 +11,7 @@ if ($_SERVER["REQUEST_METHOD"] === "GET") {
 
 
         
-        $product = new Product($item['id'], $item['product_name'], $item['description'], $item['price'],1);
+        $product = new Product($item['id'], $item['product_name'], $item['description'], $item['price'],1,$item['url_imagen']);
 
         if (isset($_SESSION["carrito"])) {
             $carrito = $_SESSION["carrito"];
