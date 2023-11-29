@@ -25,6 +25,7 @@ if (isset($_POST['submit'])) {
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
 </head>
 <body class="bg-light">
+<?php include 'navbar.inc'; ?>
 
 <div class="container mt-5">
     <div class="row justify-content-center">

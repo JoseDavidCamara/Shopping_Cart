@@ -129,6 +129,8 @@ if (!isset($_SESSION['usu_nombre'])) {
 if ($_SERVER["REQUEST_METHOD"] === "POST" && isset($_POST["miBoton"])) {
     añadirPedido($_SESSION['usu_id'],$carrito);
     unset($_SESSION["carrito"]);
+    echo "<script>window.location.href = 'index.php';</script>";
+    exit;
 
 }
 
