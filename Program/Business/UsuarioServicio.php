@@ -22,6 +22,10 @@ class UsuarioServicio {
     }
     
 } 
+function CrearUsuario($nombre, $correo, $contrasena) {
+    $usuario_dao = new UsuarioDAO();
+    $usuario_dao->insertar_usuario($nombre, $correo, $contrasena);
+}
 function iniciar_sesion($correo, $contrasena) {
     $usuario_dao = new UsuarioDAO();
      $data = $usuario_dao->validar_credenciales($correo, $contrasena);

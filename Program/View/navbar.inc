@@ -8,16 +8,18 @@
             <li class="nav-item">
                 <a class="nav-link" href="index.php">Inicio</a>
             </li>
-             <li class="nav-item">
-                <?php
-                if (!isset($_SESSION['usu_nombre'])) {
-                        echo "<a class=\"nav-link\" href=\"login.php\">Log In</a>";
-                    }else{
-                       echo "<span class=\"nav-link\">".$_SESSION['usu_nombre']."</span>";
-                    }
-                 
-                 ?>
-            </li>
+            
+            <?php
+            if (!isset($_SESSION['usu_nombre'])) {
+                    echo "<li class=\"nav-item\"><a class=\"nav-link\" href=\"login.php\">Log In</a></li>";
+                    echo "<li class=\"nav-item\"><a class=\"nav-link\" href=\"registro.php\">Registro</a></li>";
+
+                }else{
+                   echo "<li class=\"nav-item\"><span class=\"nav-link\">".$_SESSION['usu_nombre']."</span></li>";
+                }
+             
+             ?>
+            
             <li class="nav-item">
                 <a class="nav-link" href="../View/vercarrito.php"><i class="fa fa-shopping-cart" style="font-size:24px"></i></a>
             </li>
