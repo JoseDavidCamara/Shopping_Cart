@@ -58,9 +58,8 @@ function ordersList($user_id)
     $conexion = null;
 
     // Fetch the results
-    $result = $stmt->fetchAll(PDO::FETCH_ASSOC);
-
-    return $result;
+    return $stmt;
+    
     }
     catch (PDOException $e) {
         echo "Error al sacar el id de usuario: " . $e->getMessage();
