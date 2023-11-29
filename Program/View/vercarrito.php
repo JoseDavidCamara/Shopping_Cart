@@ -44,15 +44,15 @@ if (!isset($_SESSION['usu_nombre'])) {
                 <?php
             } else {
                 ?>
-                    <h1 class="text-center">Shopping Cart</h1>
+                    <h1 class="text-center">Mi Carrito</h1>
                     <table class="table table-bordered">
                         <thead>
                             <tr>
-                                <th>Product</th>
-                                <th>Price</th>
-                                <th>Quantity</th>
+                                <th>Producto</th>
+                                <th>Precio</th>
+                                <th>Cantidad</th>
                                 <th>Subtotal</th>
-                                <th>Action</th>
+                                <th></th>
                             </tr>
                         </thead>
                         <tbody>
@@ -79,7 +79,7 @@ if (!isset($_SESSION['usu_nombre'])) {
                                     </td>
                                     <td>
                                         <a href="#" class="btn btn-danger" onclick="removeCartItem('<?php echo $product->getName(); ?>'); return false;">
-                                            <i class="glyphicon glyphicon-trash"></i> Remove
+                                            <i class="glyphicon glyphicon-trash"></i> Eliminiar
                                         </a>
                                     </td>
                                 </tr>
@@ -89,7 +89,7 @@ if (!isset($_SESSION['usu_nombre'])) {
                             <tr>
                                 <td colspan="2">
                                     <a href="index.php" class="btn btn-warning">
-                                        <i class="glyphicon glyphicon-menu-left"></i> Continue Shopping
+                                        <i class="glyphicon glyphicon-menu-left"></i> Continuar comprando
                                     </a>
                                 </td>
                                 <td colspan="2" class="text-center">
@@ -97,7 +97,7 @@ if (!isset($_SESSION['usu_nombre'])) {
                                 </td>
                                 <td>
                                     <a class="btn btn-success btn-block" onclick="openModal()">
-                                        Checkout <i class="glyphicon glyphicon-menu-right"></i>
+                                        Pedir <i class="glyphicon glyphicon-menu-right"></i>
                                     </a>
                                 </td>
                             </tr>
@@ -114,15 +114,16 @@ if (!isset($_SESSION['usu_nombre'])) {
     <div class="overlay" id="overlay"></div>
     <div class="modal" id="modal">
         <div class="modal-content">
-            <p>Are you sure you want to perform this action?</p>
+            <p>¿Estas seguro de efectuar el pedido?</p>
             <div class="btn-modal-group">
                 <form method="post" action="vercarrito.php">
-                    <button onclick="confirmAction()" type="submit" name="miBoton" class="btn-modal btn-success">Confirm</button>
+                    <button onclick="confirmAction()" type="submit" name="miBoton" class="btn-modal btn-success">Confirmar</button>
                 </form>
-                <button onclick="cancelAction()" class="btn-modal btn-danger">Cancel</button>
+                <button onclick="cancelAction()" class="btn-modal btn-danger">Cancelar</button>
             </div>
         </div>
     </div>
+    
 </body>
 <?php
 

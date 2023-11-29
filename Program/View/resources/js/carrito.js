@@ -80,7 +80,7 @@
 
 
     function removeCartItem(productName) {
-        var confirmation = confirm('Are you sure you want to remove this item?');
+        var confirmation = confirm('¿Estas seguro de eliminar este producto?');
         if (confirmation) {
             $.ajax({
                 type: "POST",
@@ -91,13 +91,13 @@
                 },
                 success: function(data) {
                     if (data === 'ok') {
-                        alert('Item removed successfully.');
+                        alert('Producto eliminado con exito');
                         delete subtotals[productName];
                         total(subtotals)
                         $(".product-row[data-product-name='" + productName + "']").remove();
 
                     } else {
-                        alert('Failed to remove item. Please try again.');
+                        alert('Error al eliminar el producto pruebe de nuevo');
                     }
                 },
                 error: function() {

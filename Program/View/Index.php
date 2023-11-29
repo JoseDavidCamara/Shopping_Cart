@@ -64,7 +64,7 @@ $listado = arrayClass(
                     <?php foreach ($listado as $item) { ?>
                         <div class='col-md-4'>
                             <div class='card mb-4 shadow-sm'>
-                            <img src='resources/imgs/<?php echo $item->getUrlImagen() ?>' class='card-img-top' alt='...' style='object-fit: cover; height: 300px;'>
+                                <img src='resources/imgs/<?php echo $item->getUrlImagen() ?>' class='card-img-top' alt='...' style='object-fit: cover; height: 300px;'>
                                 <div class='card-body'>
                                     <h5 class='card-title'><?php echo $item->getName(); ?></h5>
                                     <p class='card-text'><?php echo $item->getDescription(); ?></p>
@@ -75,7 +75,8 @@ $listado = arrayClass(
                                             if (!isset($_SESSION['usu_nombre'])) {
                                                 echo "<a class='btn btn-sm btn-outline-primary' href=\"login.php\">Agregar al carrito</a>";
                                             } else {
-                                                echo "<a class='btn btn-sm btn-outline-primary' href=\"añadirCarrito.php?agregarAlCarrito=" . urlencode(json_encode($item)) . "\">Agregar al carrito</a>";
+                                                // Agrega un atributo data con la información del producto
+                                                echo "<a class='btn btn-sm btn-outline-primary agregarAlCarrito' href='#' data-product='" . urlencode(json_encode($item)) . "'>Agregar al carrito</a>";
                                             }
                                             ?>
                                         </div>
@@ -93,6 +94,32 @@ $listado = arrayClass(
     <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.6/dist/umd/popper.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
+    <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
+    <script>
+        $(document).ready(function() {
+            $(".agregarAlCarrito").click(function(e) {
+                e.preventDefault();
+
+                // Obtener la información del producto desde el atributo data
+                var productInfo = $(this).data("product");
+
+                // Realizar la llamada AJAX
+                $.ajax({
+                    url: 'añadirCarrito.php?agregarAlCarrito=' + productInfo,
+                    type: 'GET',
+                    success: function(response) {
+                        // Manejar la respuesta del servidor
+                        console.log(response);
+                        // Puedes mostrar un mensaje al usuario si lo deseas
+                    },
+                    error: function(error) {
+                        // Manejar errores
+                        console.error(error);
+                    }
+                });
+            });
+        });
+    </script>
 </body>
 
 </html>
