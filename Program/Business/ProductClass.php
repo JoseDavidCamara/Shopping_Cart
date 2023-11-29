@@ -9,6 +9,7 @@ class Product
         public string $description,
         public float $price,
         public int $quantity,
+        public string $url_imagen
     ) {
     }
 
@@ -38,6 +39,9 @@ class Product
     public function getQuantity()
     {
         return $this->quantity;
+    }
+    public function getUrlImagen(){
+        return $this->url_imagen;
     }
 
     //setters
@@ -76,7 +80,7 @@ function arrayClass($fNombre = null, $fMaxP = null, $fMinP = null)
     //Iterate through the list to get the values of each product and add it to a new Class
     //Pasa el resultado de la consulta a una lista de la clase producto
     while ($registro = $consulta->fetch()) {
-        $product = new Product($registro['id_producto'], $registro['nombre_producto'], $registro['descripcion'], $registro['precio'],1);
+        $product = new Product($registro['id_producto'], $registro['nombre_producto'], $registro['descripcion'], $registro['precio'],1, $registro['url_imagen']);
         array_push($listProductoClases, $product);
     }
     //return the new list with the classes

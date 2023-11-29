@@ -64,7 +64,7 @@ $listado = arrayClass(
                     <?php foreach ($listado as $item) { ?>
                         <div class='col-md-4'>
                             <div class='card mb-4 shadow-sm'>
-                                <img src='https://via.placeholder.com/300' class='card-img-top' alt='...'>
+                                <img src='resources/imgs/<?php echo $item->getUrlImagen() ?>' class='card-img-top' alt='...'>
                                 <div class='card-body'>
                                     <h5 class='card-title'><?php echo $item->getName(); ?></h5>
                                     <p class='card-text'><?php echo $item->getDescription(); ?></p>
