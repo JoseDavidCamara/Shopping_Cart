@@ -7,9 +7,14 @@ body {
     padding: 50px;
 }
 
+input[type="number"] {
+    width: 70px;
+    text-align: center;
+}
+
 th,
 td {
- display:flex
+    text-align: center;
 }
 
 .table {
@@ -66,10 +71,3 @@ td {
 .btn-modal-group button {
     margin: 0 5px;
 }
-
-
-body.dark-mode {
-    background-color: #343a40; /* Fondo gris oscuro */
-    color: #fff; /* Texto blanco */
-}
-

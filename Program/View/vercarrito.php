@@ -22,24 +22,26 @@ $modoOscuroCookie = isset($_COOKIE['modo_oscuro']) ? $_COOKIE['modo_oscuro'] : '
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
     <script src="resources/js/carrito.js"></script>
     <style>
-       body {
+        body {
             transition: background-color 0.3s ease;
         }
 
         body.dark-mode {
-            background-color: #343a40; /* Fondo gris oscuro */
-            color: #fff; /* Texto blanco */
+            background-color: #343a40;
+            /* Fondo gris oscuro */
+            color: #fff;
+            /* Texto blanco */
         }
 
-.table.dark-mode {
-    background-color: #333;
-    color: #fff;
-}
+        .table.dark-mode {
+            background-color: #333;
+            color: #fff;
+        }
     </style>
 
 </head>
 
-<body  class="<?php echo $modoOscuroCookie === 'true' ? 'dark-mode' : ''; ?>">
+<body class="<?php echo $modoOscuroCookie === 'true' ? 'dark-mode' : ''; ?>">
 
     <?php
     require_once '../Business/ProductClass.php';
@@ -148,11 +150,10 @@ $modoOscuroCookie = isset($_COOKIE['modo_oscuro']) ? $_COOKIE['modo_oscuro'] : '
 <?php
 
 if ($_SERVER["REQUEST_METHOD"] === "POST" && isset($_POST["miBoton"])) {
-    añadirPedido($_SESSION['usu_id'],$carrito);
+    añadirPedido($_SESSION['usu_id'], $carrito);
     unset($_SESSION["carrito"]);
     echo "<script>window.location.href = 'index.php';</script>";
     exit;
-
 }
 
 
