@@ -37,6 +37,9 @@ $modoOscuroCookie = isset($_COOKIE['modo_oscuro']) ? $_COOKIE['modo_oscuro'] : '
             background-color: #333;
             color: #fff;
         }
+        .modal-content.dark-mode {
+        background-color: black;
+    }
     </style>
 
 </head>
@@ -134,8 +137,8 @@ $modoOscuroCookie = isset($_COOKIE['modo_oscuro']) ? $_COOKIE['modo_oscuro'] : '
 
     </div>
     <div class="overlay" id="overlay"></div>
-    <div class="modal" id="modal">
-        <div class="modal-content">
+    <div class="modal <?php echo $modoOscuroCookie === 'true' ? 'dark-mode' : ''; ?>" id="modal">
+        <div class="modal-content <?php echo $modoOscuroCookie === 'true' ? 'dark-mode' : ''; ?>">
             <p>¿Estas seguro de efectuar el pedido?</p>
             <div class="btn-modal-group">
                 <form method="post" action="vercarrito.php">
