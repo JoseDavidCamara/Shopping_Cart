@@ -39,27 +39,19 @@ function añadirProductosAlPedido($idPedido, $idProducto , $cantidad)
     $conexion = null;
 }
 
-function ordersList($user_id)
+function pedidos($user_id)
 {
     try {
     $conexion = Conexion();
-    $param[':nombre'] = "%$user_id%";
-    $sql = "SELECT* FROM pedidos WHERE id_usuario=:nombre";
-
-    // Prepare the SQL statement
-    $stmt = $conexion->prepare($sql);
-    
-    // Bind the parameter
-    $stmt->bindParam(':idUsuario', $user_id, PDO::PARAM_INT);
-    
-    // Execute the query
-    $stmt->execute();
-    
-    $conexion = null;
-
-    // Fetch the results
-    return $stmt;
-    
+    $consulta=$conexion->prepare("SELECT nombre_producto,cantidad,fecha_pedido from usuarios,pedidos_productos,pedidos,productos 
+                              where usuarios.id_usuario=pedidos.id_usuario 
+                              and pedidos.id_pedido=pedidos_productos.id_pedido
+                              and pedidos_productos.id_producto=productos.id_producto
+                              and usuarios.id_usuario= :user_id 
+                              order by fecha_pedido desc");
+    $consulta->bindParam('user_id',$user_id);
+    $consulta->execute();
+    return $consulta;
     }
     catch (PDOException $e) {
         echo "Error al sacar el id de usuario: " . $e->getMessage();

@@ -4,25 +4,25 @@ class Pedido
 {
   
     public function __construct(
-        public $order_id,
-        public $user_id,
-        public $order_date,
+        public $nombre_producto,
+        public $cantidad,
+        public $fecha_pedido,
     
     ){}
 
-    public function getOrderId()
+    public function getNombreProducto()
     {
-        return $this->order_id;
+        return $this->nombre_producto;
     }
 
-    public function getUserId()
+    public function getCantidad()
     {
-        return $this->user_id;
+        return $this->cantidad;
     }
 
-    public function getOrderDate()
+    public function getFechaPedido()
     {
-        return $this->order_date;
+        return $this->fecha_pedido;
     }
     
     
@@ -42,14 +42,16 @@ function añadirPedido($id_usu, $carrito)
     }
 }
 
-function BusinessOrderList($user_id)
+function listaPedido($id_usuario)
 {
-   $consulta= ordersList($user_id);
-   $ordersList=[];
+   $consulta= pedidos($id_usuario);
+   $listadopedidos=[];
 
    while($registro=$consulta->fetch()){
-    // orders
+     $pedido= new Pedido($registro['nombre_producto'],$registro['cantidad'],$registro['fecha_pedido']);
+     array_push($listadopedidos,$pedido);
    }
 
+   return $listadopedidos;
 
 }

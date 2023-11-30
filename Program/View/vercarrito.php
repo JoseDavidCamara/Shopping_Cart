@@ -5,6 +5,9 @@ session_start();
 if (!isset($_SESSION['usu_nombre'])) {
     header("Location: login.php");
 }
+
+$modoOscuroCookie = isset($_COOKIE['modo_oscuro']) ? $_COOKIE['modo_oscuro'] : 'false';
+
 ?>
 
 <head>
@@ -18,9 +21,26 @@ if (!isset($_SESSION['usu_nombre'])) {
     <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.6/dist/umd/popper.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
     <script src="resources/js/carrito.js"></script>
+    <style>
+       body {
+            transition: background-color 0.3s ease;
+        }
+
+        body.dark-mode {
+            background-color: #343a40; /* Fondo gris oscuro */
+            color: #fff; /* Texto blanco */
+        }
+
+.table.dark-mode {
+    background-color: #333;
+    color: #fff;
+}
+    </style>
+
 </head>
 
-<body>
+<body  class="<?php echo $modoOscuroCookie === 'true' ? 'dark-mode' : ''; ?>">
+
     <?php
     require_once '../Business/ProductClass.php';
     require_once '../Business/PedidoClass.php';
@@ -45,7 +65,7 @@ if (!isset($_SESSION['usu_nombre'])) {
             } else {
                 ?>
                     <h1 class="text-center">Mi Carrito</h1>
-                    <table class="table table-bordered">
+                    <table class="table table-bordered <?php echo $modoOscuroCookie === 'true' ? 'dark-mode' : ''; ?>">
                         <thead>
                             <tr>
                                 <th>Producto</th>
@@ -62,7 +82,7 @@ if (!isset($_SESSION['usu_nombre'])) {
                                 $product = unserialize($item);
                                 // Accede a las propiedades del objeto Product
                             ?>
-                                <tr class="product-row" data-product-name='<?php echo $product->getName(); ?>'>
+                                <tr class="product-row " data-product-name='<?php echo $product->getName(); ?>'>
 
                                     <td>
                                         <?php echo $product->getName(); ?>
@@ -123,7 +143,7 @@ if (!isset($_SESSION['usu_nombre'])) {
             </div>
         </div>
     </div>
-    
+
 </body>
 <?php
 
@@ -137,4 +157,9 @@ if ($_SERVER["REQUEST_METHOD"] === "POST" && isset($_POST["miBoton"])) {
 
 
 ?>
+
+
+
+
+
 </html>

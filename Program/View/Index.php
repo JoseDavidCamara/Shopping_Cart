@@ -15,6 +15,9 @@ $listado = arrayClass(
     isset($_GET['precio_min']) ? $_GET['precio_min'] : null
 );
 
+
+$modoOscuroCookie = isset($_COOKIE['modo_oscuro']) ? $_COOKIE['modo_oscuro'] : 'false';
+
 ?>
 <!DOCTYPE html>
 <html lang="es">
@@ -25,10 +28,36 @@ $listado = arrayClass(
     <title>Mi Tienda en Línea</title>
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <style>
+       body {
+            transition: background-color ;
+        }
+
+        body.dark-mode {
+            background-color: #343a40; /* Fondo gris oscuro */
+            color: #fff; /* Texto blanco */
+        }
+
+        body.dark-mode .card {
+            background-color: #343a40; /* Fondo gris oscuro */
+            color: #fff; /* Texto blanco */
+        }
+
+        body.dark-mode .card-title,
+        body.dark-mode .card-text,
+        body.dark-mode .font-weight-bold {
+            color: #17a2b8; /* Texto azul claro */
+        }
+        body:not(.dark-mode) .navbar {
+            border-bottom: 1px solid #000;
+        }
+    </style>
 
 </head>
 
-<body>
+
+<body  class="<?php echo $modoOscuroCookie === 'true' ? 'dark-mode' : ''; ?>">
+
     <!-- Menú de navegación -->
     <?php include 'navbar.inc'; ?>
 
@@ -36,21 +65,33 @@ $listado = arrayClass(
 
     <!-- Sección de productos y menú lateral de búsqueda -->
     <div class="container mt-3">
+        <div class="row">  <div class="col-md-3 sticky-sidebar top">
+            <div class="custom-control custom-switch">
+    <input type="checkbox" class="custom-control-input" id="modoOscuroSwitch" <?php echo $modoOscuroCookie === 'true' ? 'checked' : ''; ?>>
+    <label class="custom-control-label" for="modoOscuroSwitch">Modo Oscuro</label>
+</div></div>
         <div class="row">
             <!-- Menú lateral de búsqueda -->
             <div class="col-md-3 sticky-sidebar top">
+                
                 <div class="card mb-4">
                     <div class="card-body">
-                        <h5 class="card-title">Filtrar Productos</h5>
-                        <form method="get">
+                        <h5 class="card-title text-primary">Filtrar Productos</h5>
+                        <form method="get"> 
+                           <div class="form-group">
                             <label for="nombre">Buscar por nombre:</label>
                             <input type="text" name="nombre" id="nombre" class="form-control">
+                            </div>
                             <br>
+                            <div class="form-group">
                             <label for="precio_min">Precio mínimo:</label>
                             <input type="number" name="precio_min" id="precio_min" class="form-control">
+                            </div>
                             <br>
+                            <div class="form-group">
                             <label for="precio_max">Precio máximo:</label>
                             <input type="number" name="precio_max" id="precio_max" class="form-control">
+                            </div>
                             <br>
                             <input type="submit" value="Buscar" class="btn btn-primary">
                         </form>
@@ -66,17 +107,17 @@ $listado = arrayClass(
                             <div class='card mb-4 shadow-sm'>
                                 <img src='resources/imgs/<?php echo $item->getUrlImagen() ?>' class='card-img-top' alt='...' style='object-fit: cover; height: 300px;'>
                                 <div class='card-body'>
-                                    <h5 class='card-title'><?php echo $item->getName(); ?></h5>
+                                    <h5 class='card-title text-info'><?php echo $item->getName(); ?></h5>
                                     <p class='card-text'><?php echo $item->getDescription(); ?></p>
-                                    <p class='card-text'><?php echo $item->getPrice(); ?> €</p>
+                                    <p class='card-text font-weigth-bold'><?php echo $item->getPrice(); ?> €</p>
                                     <div class='d-flex justify-content-between align-items-center'>
                                         <div class='btn-group'>
                                             <?php
                                             if (!isset($_SESSION['usu_nombre'])) {
-                                                echo "<a class='btn btn-sm btn-outline-primary' href=\"login.php\">Agregar al carrito</a>";
+                                                echo "<a class='btn btn-sm btn-outline-secondary' href=\"login.php\">Agregar al carrito</a>";
                                             } else {
                                                 // Agrega un atributo data con la información del producto
-                                                echo "<a class='btn btn-sm btn-outline-primary agregarAlCarrito' href='#' data-product='" . urlencode(json_encode($item)) . "'>Agregar al carrito</a>";
+                                                echo "<a class='btn btn-sm btn-outline-success agregarAlCarrito' href='#' data-product='" . urlencode(json_encode($item)) . "'>Agregar al carrito</a>";
                                             }
                                             ?>
                                         </div>
@@ -111,6 +152,7 @@ $listado = arrayClass(
                         // Manejar la respuesta del servidor
                         console.log(response);
                         // Puedes mostrar un mensaje al usuario si lo deseas
+                        window.alert('Producto agregado al carrito')
                     },
                     error: function(error) {
                         // Manejar errores
@@ -119,6 +161,19 @@ $listado = arrayClass(
                 });
             });
         });
+
+           // Función para cambiar el modo oscuro
+           function toggleDarkMode() {
+            var body = document.body;
+            body.classList.toggle('dark-mode');
+
+            // Guarda el estado en una cookie
+            var modoOscuroCookie = body.classList.contains('dark-mode') ? 'true' : 'false';
+            document.cookie = 'modo_oscuro=' + modoOscuroCookie + '; path=/';
+        }
+
+        // Asigna la función al evento de cambio del interruptor
+        document.getElementById('modoOscuroSwitch').addEventListener('change', toggleDarkMode);
     </script>
 </body>
 
