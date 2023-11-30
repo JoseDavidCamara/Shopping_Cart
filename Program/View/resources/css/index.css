@@ -1,0 +1,28 @@
+body {
+    transition: background-color;
+}
+
+body.dark-mode {
+    background-color: #343a40;
+    /* Fondo gris oscuro */
+    color: #fff;
+    /* Texto blanco */
+}
+
+body.dark-mode .card {
+    background-color: #696969 !important;
+    /* Fondo gris oscuro */
+    color: #fff;
+    /* Texto blanco */
+}
+
+body.dark-mode .card-title,
+body.dark-mode .card-text,
+body.dark-mode .font-weight-bold {
+    color: #fff;
+    /* Texto azul claro */
+}
+
+body:not(.dark-mode) .navbar {
+    border-bottom: 1px solid #000;
+}

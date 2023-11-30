@@ -84,3 +84,22 @@ td {
 #modal {
     background-color: black;
 }
+
+body {
+    transition: background-color 0.3s ease;
+}
+
+body.dark-mode {
+    background-color: #343a40;
+    /* Fondo gris oscuro */
+    color: #fff;
+    /* Texto blanco */
+}
+
+.table.dark-mode {
+    background-color: #333;
+    color: #fff;
+}
+.modal-content.dark-mode {
+background-color: black;
+}

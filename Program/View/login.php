@@ -26,63 +26,7 @@ $darkModeClass = $modoOscuroCookie === 'true' ? '' : 'dark-mode';
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <title>Login</title>
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
-    <style>
-       body {
-            background-color: #343a40; /* Dark background color */
-            color: #fff; /* Light text color */
-        }
-
-        .dark-mode body {
-            background-color: #fff; /* Light background color in dark mode */
-            color: #000; /* Dark text color in dark mode */
-        }
-
-        .card {
-            background-color: #424a52; /* Dark card background color */
-            color: #fff; /* Light text color for card content */
-        }
-
-        .dark-mode .card {
-            background-color: #fff; /* Light card background color in dark mode */
-            color: #000; /* Dark text color for card content in dark mode */
-        }
-
-        .form-control {
-            background-color: #495057; /* Dark form input background color */
-            color: #fff; /* Light text color for form input */
-        }
-
-        .dark-mode .form-control {
-            background-color: #fff; /* Light form input background color in dark mode */
-            color: #000; /* Dark text color for form input in dark mode */
-        }
-
-        .btn-primary {
-            background-color: #007bff; /* Bootstrap primary color for the button */
-        }
-
-        .btn-primary:hover {
-            background-color: #0056b3; /* Darker color on hover */
-        }
-
-        .dark-mode .btn-primary {
-            background-color: #0056b3; /* Darker primary color in dark mode */
-        }
-
-        .dark-mode .btn-primary:hover {
-            background-color: #003366; /* Darker color on hover in dark mode */
-        }
-
-        .alert {
-            background-color: #dc3545; /* Bootstrap alert danger color */
-            color: #fff; /* Light text color for alert */
-        }
-
-        .dark-mode .alert {
-            background-color: #ff0000; /* Darker alert color in dark mode */
-            color: #fff; /* Light text color for alert in dark mode */
-        }
-    </style>
+    <link rel="stylesheet" href="resources/css/login.css">
 </head>
 <body>
 <?php include 'navbar.inc'; ?>

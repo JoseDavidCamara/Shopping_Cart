@@ -21,26 +21,7 @@ $modoOscuroCookie = isset($_COOKIE['modo_oscuro']) ? $_COOKIE['modo_oscuro'] : '
     <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.6/dist/umd/popper.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
     <script src="resources/js/carrito.js"></script>
-    <style>
-        body {
-            transition: background-color 0.3s ease;
-        }
-
-        body.dark-mode {
-            background-color: #343a40;
-            /* Fondo gris oscuro */
-            color: #fff;
-            /* Texto blanco */
-        }
-
-        .table.dark-mode {
-            background-color: #333;
-            color: #fff;
-        }
-        .modal-content.dark-mode {
-        background-color: black;
-    }
-    </style>
+  
 
 </head>
 

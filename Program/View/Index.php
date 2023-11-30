@@ -28,36 +28,7 @@ $modoOscuroCookie = isset($_COOKIE['modo_oscuro']) ? $_COOKIE['modo_oscuro'] : '
     <title>Mi Tienda en Línea</title>
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
-    <style>
-        body {
-            transition: background-color;
-        }
-
-        body.dark-mode {
-            background-color: #343a40;
-            /* Fondo gris oscuro */
-            color: #fff;
-            /* Texto blanco */
-        }
-
-        body.dark-mode .card {
-            background-color: #696969 !important;
-            /* Fondo gris oscuro */
-            color: #fff;
-            /* Texto blanco */
-        }
-
-        body.dark-mode .card-title,
-        body.dark-mode .card-text,
-        body.dark-mode .font-weight-bold {
-            color: #fff;
-            /* Texto azul claro */
-        }
-
-        body:not(.dark-mode) .navbar {
-            border-bottom: 1px solid #000;
-        }
-    </style>
+    <link rel="stylesheet" href="resources/css/index.css">
 
 </head>
 
@@ -121,7 +92,7 @@ $modoOscuroCookie = isset($_COOKIE['modo_oscuro']) ? $_COOKIE['modo_oscuro'] : '
                                         <div class='btn-group'>
                                             <?php
                                             if (!isset($_SESSION['usu_nombre'])) {
-                                                echo "<a class='btn btn-sm btn-outline-secondary' href=\"login.php\">Agregar al carrito</a>";
+                                                echo "<a class='btn btn-sm btn-outline-success agregarAlCarrito' href=\"login.php\">Agregar al carrito</a>";
                                             } else {
                                                 // Agrega un atributo data con la información del producto
                                                 echo "<a class='btn btn-sm btn-outline-success agregarAlCarrito' href='#' data-product='" . urlencode(json_encode($item)) . "'>Agregar al carrito</a>";
