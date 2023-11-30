@@ -1,13 +1,13 @@
 <?php
-    session_start();
-    include 'navbar.inc';
-    require_once '../Business/PedidoClass.php';
-    if (!isset($_SESSION['usu_nombre'])) {
-        header("Location: login.php");
-    }
-    $modoOscuroCookie = isset($_COOKIE['modo_oscuro']) ? $_COOKIE['modo_oscuro'] : 'false';
-    
-    ?>
+session_start();
+include 'navbar.inc';
+require_once '../Business/PedidoClass.php';
+if (!isset($_SESSION['usu_nombre'])) {
+    header("Location: login.php");
+}
+$modoOscuroCookie = isset($_COOKIE['modo_oscuro']) ? $_COOKIE['modo_oscuro'] : 'false';
+
+?>
 
 <!DOCTYPE html>
 <html lang="en">
@@ -20,19 +20,24 @@
     <style>
         body {
             font-family: Arial, sans-serif;
-            background-color: #f8f9fa; /* Fondo principal, cambia según tus preferencias */
-            color: #333; /* Color de texto predeterminado */
+            background-color: #f8f9fa;
+            /* Fondo principal, cambia según tus preferencias */
+            color: #333;
+            /* Color de texto predeterminado */
             transition: background-color 0.3s ease, color 0.3s ease;
         }
 
         body.dark-mode {
-            background-color: #343a40; /* Fondo gris oscuro */
-            color: #fff; /* Texto blanco en modo oscuro */
+            background-color: #343a40;
+            /* Fondo gris oscuro */
+            color: #fff;
+            /* Texto blanco en modo oscuro */
         }
 
         h1 {
             text-align: center;
-            color: #007bff; /* Azul brillante, puedes cambiar el color según tus preferencias */
+            color: #007bff;
+            /* Azul brillante, puedes cambiar el color según tus preferencias */
         }
 
         .pedido-container {
@@ -42,12 +47,14 @@
             border: 1px solid #ccc;
             border-radius: 5px;
             margin-top: 20px;
-            background-color: #fff; /* Fondo de los contenedores, puedes cambiar según tus preferencias */
+            background-color: #fff;
+            /* Fondo de los contenedores, puedes cambiar según tus preferencias */
             transition: background-color 0.3s ease;
         }
 
         .pedido-container.dark-mode {
-            background-color: #333; /* Fondo gris oscuro en modo oscuro */
+            background-color: #333;
+            /* Fondo gris oscuro en modo oscuro */
         }
 
         .pedido-item {
@@ -59,7 +66,8 @@
         }
 
         .pedido-item.dark-mode {
-            background-color: #444; /* Fondo gris oscuro en modo oscuro */
+            background-color: #444;
+            /* Fondo gris oscuro en modo oscuro */
         }
 
         .pedido-item h3 {
@@ -68,7 +76,8 @@
         }
 
         .pedido-item.dark-mode h3 {
-            color: #fff; /* Color de texto blanco en modo oscuro */
+            color: #fff;
+            /* Color de texto blanco en modo oscuro */
         }
 
         .pedido-item p {
@@ -77,47 +86,62 @@
         }
 
         .pedido-item.dark-mode p {
-            color: #ccc; /* Color de texto gris claro en modo oscuro */
+            color: #ccc;
+            /* Color de texto gris claro en modo oscuro */
         }
     </style>
 </head>
 
 <body class="<?php echo $modoOscuroCookie === 'true' ? 'dark-mode' : ''; ?>">
+    <div class="container">
+        <form class="form-inline float-left" method="get" action="">
+            <div class="form-group mx-sm-3 mb-2">
+                <label for="fecha" class="sr-only">Filtrar por fecha:</label>
+                <input type="date" class="form-control" id="fecha" name="fecha" value="<?php echo isset($_GET['fecha']) ? htmlspecialchars($_GET['fecha']) : ''; ?>">
+            </div>
+            <button type="submit" class="btn btn-primary mb-2">Filtrar</button>
+        </form>
+    </div>
 
-    <?php
-    // Tu código PHP para obtener la lista de pedidos
-    $listado = listaPedido($_SESSION['usu_id']);
+    <div class="container">
 
-    echo '<h1>Historial de Pedidos</h1>';
+        <?php
+        // Tu código PHP para obtener la lista de pedidos
+        $fechaFiltro = isset($_GET['fecha']) ? $_GET['fecha'] : null;
+        $listado = listaPedido($_SESSION['usu_id'], $fechaFiltro);
 
-    // Creamos un array para agrupar los pedidos por fecha
-    $pedidosPorFecha = [];
+        echo '<h1>Historial de Pedidos</h1>';
 
-    foreach ($listado as $pedido) {
-        $fecha = $pedido->getFechaPedido();
+        // Creamos un array para agrupar los pedidos por fecha
+        $pedidosPorFecha = [];
 
-        if (!isset($pedidosPorFecha[$fecha])) {
-            $pedidosPorFecha[$fecha] = [];
+        foreach ($listado as $pedido) {
+            $fecha = $pedido->getFechaPedido();
+
+            if (!isset($pedidosPorFecha[$fecha])) {
+                $pedidosPorFecha[$fecha] = [];
+            }
+
+            $pedidosPorFecha[$fecha][] = $pedido;
         }
 
-        $pedidosPorFecha[$fecha][] = $pedido;
-    }
+        // Mostramos los pedidos agrupados por fecha
+        foreach ($pedidosPorFecha as $fecha => $pedidos) {
+            echo '<div class="pedido-container ' . ($modoOscuroCookie === 'true' ? 'dark-mode' : '') . '">';
+            echo '<h3>Pedido realizado el: ' . $fecha . '</h3>';
 
-    // Mostramos los pedidos agrupados por fecha
-    foreach ($pedidosPorFecha as $fecha => $pedidos) {
-        echo '<div class="pedido-container ' . ($modoOscuroCookie === 'true' ? 'dark-mode' : '') . '">';
-        echo '<h3>Pedido realizado el: ' . $fecha . '</h3>';
+            foreach ($pedidos as $pedido) {
+                echo '<div class="pedido-item ' . ($modoOscuroCookie === 'true' ? 'dark-mode' : '') . '">';
+                echo '<h4>' . $pedido->getNombreProducto() . '</h4>';
+                echo '<p>Cantidad: ' . $pedido->getCantidad() . '</p>';
+                echo '</div>';
+            }
 
-        foreach ($pedidos as $pedido) {
-            echo '<div class="pedido-item ' . ($modoOscuroCookie === 'true' ? 'dark-mode' : '') . '">';
-            echo '<h4>' . $pedido->getNombreProducto() . '</h4>';
-            echo '<p>Cantidad: ' . $pedido->getCantidad() . '</p>';
             echo '</div>';
         }
+        ?>
+    </div>
 
-        echo '</div>';
-    }
-    ?>
 </body>
 
 </html>

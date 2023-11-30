@@ -29,25 +29,31 @@ $modoOscuroCookie = isset($_COOKIE['modo_oscuro']) ? $_COOKIE['modo_oscuro'] : '
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
     <style>
-       body {
-            transition: background-color ;
+        body {
+            transition: background-color;
         }
 
         body.dark-mode {
-            background-color: #343a40; /* Fondo gris oscuro */
-            color: #fff; /* Texto blanco */
+            background-color: #343a40;
+            /* Fondo gris oscuro */
+            color: #fff;
+            /* Texto blanco */
         }
 
         body.dark-mode .card {
-            background-color: #343a40; /* Fondo gris oscuro */
-            color: #fff; /* Texto blanco */
+            background-color: #696969 !important;
+            /* Fondo gris oscuro */
+            color: #fff;
+            /* Texto blanco */
         }
 
         body.dark-mode .card-title,
         body.dark-mode .card-text,
         body.dark-mode .font-weight-bold {
-            color: #17a2b8; /* Texto azul claro */
+            color: #fff;
+            /* Texto azul claro */
         }
+
         body:not(.dark-mode) .navbar {
             border-bottom: 1px solid #000;
         }
@@ -56,7 +62,7 @@ $modoOscuroCookie = isset($_COOKIE['modo_oscuro']) ? $_COOKIE['modo_oscuro'] : '
 </head>
 
 
-<body  class="<?php echo $modoOscuroCookie === 'true' ? 'dark-mode' : ''; ?>">
+<body class="<?php echo $modoOscuroCookie === 'true' ? 'dark-mode' : ''; ?>">
 
     <!-- Menú de navegación -->
     <?php include 'navbar.inc'; ?>
@@ -65,32 +71,33 @@ $modoOscuroCookie = isset($_COOKIE['modo_oscuro']) ? $_COOKIE['modo_oscuro'] : '
 
     <!-- Sección de productos y menú lateral de búsqueda -->
     <div class="container mt-3">
-        <div class="row">  <div class="col-md-3 sticky-sidebar top">
+        <div class="col-md-3 ">
             <div class="custom-control custom-switch">
-    <input type="checkbox" class="custom-control-input" id="modoOscuroSwitch" <?php echo $modoOscuroCookie === 'true' ? 'checked' : ''; ?>>
-    <label class="custom-control-label" for="modoOscuroSwitch">Modo Oscuro</label>
-</div></div>
+                <input type="checkbox" class="custom-control-input" id="modoOscuroSwitch" <?php echo $modoOscuroCookie === 'true' ? 'checked' : ''; ?>>
+                <label class="custom-control-label" for="modoOscuroSwitch">Modo Oscuro</label>
+            </div>
+        </div>
         <div class="row">
             <!-- Menú lateral de búsqueda -->
             <div class="col-md-3 sticky-sidebar top">
-                
+
                 <div class="card mb-4">
                     <div class="card-body">
                         <h5 class="card-title text-primary">Filtrar Productos</h5>
-                        <form method="get"> 
-                           <div class="form-group">
-                            <label for="nombre">Buscar por nombre:</label>
-                            <input type="text" name="nombre" id="nombre" class="form-control">
+                        <form method="get">
+                            <div class="form-group">
+                                <label for="nombre">Buscar por nombre:</label>
+                                <input type="text" name="nombre" id="nombre" value="<?php echo isset($_GET['nombre']) ? htmlspecialchars($_GET['nombre']) : ''; ?>" class="form-control">
                             </div>
                             <br>
                             <div class="form-group">
-                            <label for="precio_min">Precio mínimo:</label>
-                            <input type="number" name="precio_min" id="precio_min" class="form-control">
+                                <label for="precio_min">Precio mínimo:</label>
+                                <input type="number" name="precio_min" id="precio_min" value="<?php echo isset($_GET['precio_max']) ? htmlspecialchars($_GET['precio_max']) : ''; ?>" class="form-control">
                             </div>
                             <br>
                             <div class="form-group">
-                            <label for="precio_max">Precio máximo:</label>
-                            <input type="number" name="precio_max" id="precio_max" class="form-control">
+                                <label for="precio_max">Precio máximo:</label>
+                                <input type="number" name="precio_max" id="precio_max" value="<?php echo isset($_GET['precio_min']) ? htmlspecialchars($_GET['precio_min']) : ''; ?>" class="form-control">
                             </div>
                             <br>
                             <input type="submit" value="Buscar" class="btn btn-primary">
@@ -162,8 +169,8 @@ $modoOscuroCookie = isset($_COOKIE['modo_oscuro']) ? $_COOKIE['modo_oscuro'] : '
             });
         });
 
-           // Función para cambiar el modo oscuro
-           function toggleDarkMode() {
+        // Función para cambiar el modo oscuro
+        function toggleDarkMode() {
             var body = document.body;
             body.classList.toggle('dark-mode');
 

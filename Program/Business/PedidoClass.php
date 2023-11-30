@@ -42,9 +42,9 @@ function añadirPedido($id_usu, $carrito)
     }
 }
 
-function listaPedido($id_usuario)
+function listaPedido($id_usuario,$fecha = null)
 {
-   $consulta= pedidos($id_usuario);
+   $consulta= pedidos($id_usuario, $fecha);
    $listadopedidos=[];
 
    while($registro=$consulta->fetch()){

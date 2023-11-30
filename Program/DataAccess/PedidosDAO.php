@@ -39,24 +39,38 @@ function añadirProductosAlPedido($idPedido, $idProducto , $cantidad)
     $conexion = null;
 }
 
-function pedidos($user_id)
+function pedidos($user_id, $fecha = null)
 {
     try {
-    $conexion = Conexion();
-    $consulta=$conexion->prepare("SELECT nombre_producto,cantidad,fecha_pedido from usuarios,pedidos_productos,pedidos,productos 
-                              where usuarios.id_usuario=pedidos.id_usuario 
-                              and pedidos.id_pedido=pedidos_productos.id_pedido
-                              and pedidos_productos.id_producto=productos.id_producto
-                              and usuarios.id_usuario= :user_id 
-                              order by fecha_pedido desc");
-    $consulta->bindParam('user_id',$user_id);
-    $consulta->execute();
-    return $consulta;
-    }
-    catch (PDOException $e) {
-        echo "Error al sacar el id de usuario: " . $e->getMessage();
-    }finally  {
-        $conexion = null;
-    }  
+        $conexion = Conexion();
 
+        if ($fecha) {
+            $consulta = $conexion->prepare("SELECT nombre_producto, cantidad, fecha_pedido 
+                                           FROM usuarios, pedidos_productos, pedidos, productos 
+                                           WHERE usuarios.id_usuario = pedidos.id_usuario 
+                                           AND pedidos.id_pedido = pedidos_productos.id_pedido
+                                           AND pedidos_productos.id_producto = productos.id_producto
+                                           AND usuarios.id_usuario = :user_id
+                                           AND DATE(fecha_pedido) = :fecha
+                                           ORDER BY fecha_pedido DESC");
+            $consulta->bindParam('fecha', $fecha);
+        } else {
+            $consulta = $conexion->prepare("SELECT nombre_producto, cantidad, fecha_pedido 
+                                           FROM usuarios, pedidos_productos, pedidos, productos 
+                                           WHERE usuarios.id_usuario = pedidos.id_usuario 
+                                           AND pedidos.id_pedido = pedidos_productos.id_pedido
+                                           AND pedidos_productos.id_producto = productos.id_producto
+                                           AND usuarios.id_usuario = :user_id
+                                           ORDER BY fecha_pedido DESC");
+        }
+
+        $consulta->bindParam('user_id', $user_id);
+        $consulta->execute();
+
+        return $consulta;
+    } catch (PDOException $e) {
+        echo "Error al sacar el id de usuario: " . $e->getMessage();
+    } finally {
+        $conexion = null;
+    }
 }
