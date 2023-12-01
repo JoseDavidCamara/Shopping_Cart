@@ -26,9 +26,10 @@ $modoOscuroCookie = isset($_COOKIE['modo_oscuro']) ? $_COOKIE['modo_oscuro'] : '
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <title>Mi Tienda en Línea</title>
+    <link rel="stylesheet" href="resources/css/index.css">
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
-    <link rel="stylesheet" href="resources/css/index.css">
+
 
 </head>
 
@@ -78,6 +79,7 @@ $modoOscuroCookie = isset($_COOKIE['modo_oscuro']) ? $_COOKIE['modo_oscuro'] : '
             </div>
 
             <!-- Productos -->
+
             <div class="col-md-9">
                 <div class="row">
                     <?php foreach ($listado as $item) { ?>
@@ -92,7 +94,7 @@ $modoOscuroCookie = isset($_COOKIE['modo_oscuro']) ? $_COOKIE['modo_oscuro'] : '
                                         <div class='btn-group'>
                                             <?php
                                             if (!isset($_SESSION['usu_nombre'])) {
-                                                echo "<a class='btn btn-sm btn-outline-success agregarAlCarrito' href=\"login.php\">Agregar al carrito</a>";
+                                                echo "<a class='btn btn-sm btn-outline-success' href=\"login.php\">Agregar al carrito</a>";
                                             } else {
                                                 // Agrega un atributo data con la información del producto
                                                 echo "<a class='btn btn-sm btn-outline-success agregarAlCarrito' href='#' data-product='" . urlencode(json_encode($item)) . "'>Agregar al carrito</a>";
@@ -108,6 +110,7 @@ $modoOscuroCookie = isset($_COOKIE['modo_oscuro']) ? $_COOKIE['modo_oscuro'] : '
             </div>
         </div>
     </div>
+    <div id="mensajeCarrito" class="alert alert-success mensaje-carrito" style="display:none;"></div>
 
     <!-- Agrega la referencia a Bootstrap JS y Popper.js -->
     <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"></script>
@@ -126,11 +129,15 @@ $modoOscuroCookie = isset($_COOKIE['modo_oscuro']) ? $_COOKIE['modo_oscuro'] : '
                 $.ajax({
                     url: 'añadirCarrito.php?agregarAlCarrito=' + productInfo,
                     type: 'GET',
+                    dataType: 'json', // Espera una respuesta JSON del servidor
                     success: function(response) {
                         // Manejar la respuesta del servidor
                         console.log(response);
-                        // Puedes mostrar un mensaje al usuario si lo deseas
-                        window.alert('Producto agregado al carrito')
+
+                        // Mostrar el mensaje de éxito o el mensaje de producto ya en el carrito
+                        $("#mensajeCarrito").text(response.message).fadeIn().delay(2000).fadeOut();
+
+                        // Puedes realizar acciones adicionales según la respuesta del servidor
                     },
                     error: function(error) {
                         // Manejar errores
@@ -139,6 +146,7 @@ $modoOscuroCookie = isset($_COOKIE['modo_oscuro']) ? $_COOKIE['modo_oscuro'] : '
                 });
             });
         });
+
 
         // Función para cambiar el modo oscuro
         function toggleDarkMode() {

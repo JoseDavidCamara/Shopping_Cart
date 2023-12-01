@@ -30,19 +30,20 @@ if ($_SERVER["REQUEST_METHOD"] === "GET") {
             // Agregar el nuevo producto solo si no está en el carrito
             if (!$productAlreadyInCart) {
                 $carrito[] = serialize($product);
+                $message = "Producto agregado al carrito.";
+            } else {
+                $message = "Este producto ya está en el carrito.";
             }
         } else {
             $carrito = array();
+            $carrito[] = serialize($product);
+            $message = "Producto agregado al carrito.";
         }
 
-        print_r($product);
-
         $_SESSION["carrito"] = $carrito;
-    }
 
-    // No redireccionar aquí, ya que estás manejando la solicitud AJAX
-    // header("Location: index.php");
-    // Puedes imprimir una respuesta JSON si es necesario
-    // echo json_encode(["success" => true, "message" => "Producto agregado al carrito"]);
+        // Enviar el mensaje de vuelta al JavaScript
+        echo json_encode(["success" => true, "message" => $message]);
+    }
 }
 ?>
