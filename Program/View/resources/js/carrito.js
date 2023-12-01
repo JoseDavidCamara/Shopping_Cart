@@ -80,8 +80,15 @@
 
 
     function removeCartItem(productName) {
-        var confirmation = confirm('¿Estas seguro de eliminar este producto?');
-        if (confirmation) {
+        // Mostrar el modal de eliminación
+        $("#deleteConfirmationModal").show();
+    
+        // Manejar el clic en el botón de confirmación dentro del modal
+        $("#confirmDelete").one("click", function() {
+            // Ocultar el modal después de hacer clic en Confirmar
+            $("#deleteConfirmationModal").hide();
+    
+            // Realizar la acción de eliminación
             $.ajax({
                 type: "POST",
                 url: "deleteproduct.php",
@@ -91,21 +98,40 @@
                 },
                 success: function(data) {
                     if (data === 'ok') {
-                        alert('Producto eliminado con exito');
+                        // Mensaje de éxito en el modal
+                        $("#successMessageModal").show();
+                        setTimeout(function() {
+                            $("#successMessageModal").hide();
+                        }, 2000); // Ocultar el mensaje después de 2 segundos
+    
                         delete subtotals[productName];
-                        total(subtotals)
+                        total(subtotals);
                         $(".product-row[data-product-name='" + productName + "']").remove();
-
                     } else {
-                        alert('Error al eliminar el producto pruebe de nuevo');
+                        // Mensaje de error en el modal
+                        $("#errorMessageModal").show();
+                        setTimeout(function() {
+                            $("#errorMessageModal").hide();
+                        }, 2000); // Ocultar el mensaje después de 2 segundos
                     }
                 },
                 error: function() {
-                    alert('Error in Ajax request.');
+                    // Mensaje de error en el modal
+                    $("#errorMessageModal").show();
+                    setTimeout(function() {
+                        $("#errorMessageModal").hide();
+                    }, 2000); // Ocultar el mensaje después de 2 segundos
                 }
             });
-        }
+        });
+    
+        // Manejar el clic en el botón de cancelar dentro del modal
+        $(".close-delete").one("click", function() {
+            // Ocultar el modal sin realizar la acción de eliminación
+            $("#deleteConfirmationModal").hide();
+        });
     }
+    
 
 
     function total(subtotal) {
