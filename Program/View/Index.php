@@ -64,12 +64,12 @@ $modoOscuroCookie = isset($_COOKIE['modo_oscuro']) ? $_COOKIE['modo_oscuro'] : '
                             <br>
                             <div class="form-group">
                                 <label for="precio_min">Precio mínimo:</label>
-                                <input type="number" name="precio_min" id="precio_min" value="<?php echo isset($_GET['precio_max']) ? htmlspecialchars($_GET['precio_max']) : ''; ?>" class="form-control">
+                                <input type="number" name="precio_min" id="precio_min" value="<?php echo isset($_GET['precio_min']) ? htmlspecialchars($_GET['precio_min']) : ''; ?>" class="form-control">
                             </div>
                             <br>
                             <div class="form-group">
                                 <label for="precio_max">Precio máximo:</label>
-                                <input type="number" name="precio_max" id="precio_max" value="<?php echo isset($_GET['precio_min']) ? htmlspecialchars($_GET['precio_min']) : ''; ?>" class="form-control">
+                                <input type="number" name="precio_max" id="precio_max" value="<?php echo isset($_GET['precio_max']) ? htmlspecialchars($_GET['precio_max']) : ''; ?>" class="form-control">
                             </div>
                             <br>
                             <input type="submit" value="Buscar" class="btn btn-primary">
