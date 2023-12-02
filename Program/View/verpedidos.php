@@ -34,7 +34,7 @@ $modoOscuroCookie = isset($_COOKIE['modo_oscuro']) ? $_COOKIE['modo_oscuro'] : '
                     <form class="form-inline" method="get" action="">
                         <div class="form-group mx-1 mb-2"> <!-- Reducir los márgenes horizontal y vertical del grupo de formulario -->
                             <label for="fecha" class="sr-only">Fecha:</label>
-                            <input type="date" class="form-control">
+                            <input type="date" class="form-control" name="fecha">
                         </div>
                         <button type="submit" class="btn btn-primary mb-2">Filtrar</button>
                     </form>
