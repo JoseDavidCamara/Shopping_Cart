@@ -1,0 +1,76 @@
+body {
+    font-family: Arial, sans-serif;
+    background-color: #f8f9fa;
+    /* Fondo principal, cambia según tus preferencias */
+    color: #333;
+    /* Color de texto predeterminado */
+    transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+body.dark-mode {
+    background-color: #343a40;
+    /* Fondo gris oscuro */
+    color: #fff;
+    /* Texto blanco en modo oscuro */
+}
+
+h1 {
+    text-align: center;
+    color: #007bff;
+    /* Azul brillante, puedes cambiar el color según tus preferencias */
+}
+
+.pedido-container {
+    max-width: 600px;
+    margin: auto;
+    padding: 20px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    margin-top: 20px;
+    background-color: #fff;
+    transition: background-color 0.3s ease;
+}
+
+.pedido-container.dark-mode {
+    background-color: #333;
+
+}
+
+.pedido-item {
+    margin-bottom: 15px;
+    padding: 10px;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    transition: background-color 0.3s ease;
+}
+
+.pedido-item.dark-mode {
+    background-color: #444;
+
+}
+
+.pedido-item h3 {
+    color: #333;
+    margin-bottom: 10px;
+}
+
+.pedido-item.dark-mode h3 {
+    color: #fff;
+
+}
+
+.pedido-item p {
+    margin: 0;
+    color: #777;
+}
+
+.pedido-item.dark-mode p {
+    color: #ccc;
+ 
+}
+
+.dark-mode {
+background-color: #333; 
+color: #fff;
+
+}
