@@ -94,10 +94,10 @@ $modoOscuroCookie = isset($_COOKIE['modo_oscuro']) ? $_COOKIE['modo_oscuro'] : '
                                         <div class='btn-group'>
                                             <?php
                                             if (!isset($_SESSION['usu_nombre'])) {
-                                                echo "<a class='btn btn-sm btn-outline-success' href=\"login.php\">Agregar al carrito</a>";
+                                                echo "<a class='btn btn-sm btn-danger' href=\"login.php\">Agregar al carrito</a>";
                                             } else {
                                                 // Agrega un atributo data con la información del producto
-                                                echo "<a class='btn btn-sm btn-outline-success agregarAlCarrito' href='#' data-product='" . urlencode(json_encode($item)) . "'>Agregar al carrito</a>";
+                                                echo "<a class='btn btn-sm btn-success agregarAlCarrito' href='#' data-product='" . urlencode(json_encode($item)) . "'>Agregar al carrito</a>";
                                             }
                                             ?>
                                         </div>

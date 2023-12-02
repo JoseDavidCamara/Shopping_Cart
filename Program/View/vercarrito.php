@@ -131,8 +131,8 @@ $modoOscuroCookie = isset($_COOKIE['modo_oscuro']) ? $_COOKIE['modo_oscuro'] : '
     </div>
     <div id="deleteConfirmationModal" class="modal-delete">
     <div class="modal-content-delete">
-        <span class="close-delete">&times;</span>
-        <p>¿Estás seguro de que deseas eliminar este producto?</p>
+        <span class="close-delete ">&times;</span>
+        <p  class="<?php echo $modoOscuroCookie === 'true' ? 'dark' : '';?>">¿Estás seguro de que deseas eliminar este producto?</p>
         <button id="confirmDelete" class="btn-modal btn-danger">Eliminar</button>
     </div>
 </div>

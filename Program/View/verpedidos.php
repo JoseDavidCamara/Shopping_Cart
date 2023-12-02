@@ -52,13 +52,12 @@ $modoOscuroCookie = isset($_COOKIE['modo_oscuro']) ? $_COOKIE['modo_oscuro'] : '
             border-radius: 5px;
             margin-top: 20px;
             background-color: #fff;
-            /* Fondo de los contenedores, puedes cambiar según tus preferencias */
             transition: background-color 0.3s ease;
         }
 
         .pedido-container.dark-mode {
             background-color: #333;
-            /* Fondo gris oscuro en modo oscuro */
+   
         }
 
         .pedido-item {
@@ -71,7 +70,7 @@ $modoOscuroCookie = isset($_COOKIE['modo_oscuro']) ? $_COOKIE['modo_oscuro'] : '
 
         .pedido-item.dark-mode {
             background-color: #444;
-            /* Fondo gris oscuro en modo oscuro */
+        
         }
 
         .pedido-item h3 {
@@ -81,7 +80,7 @@ $modoOscuroCookie = isset($_COOKIE['modo_oscuro']) ? $_COOKIE['modo_oscuro'] : '
 
         .pedido-item.dark-mode h3 {
             color: #fff;
-            /* Color de texto blanco en modo oscuro */
+      
         }
 
         .pedido-item p {
@@ -91,13 +90,13 @@ $modoOscuroCookie = isset($_COOKIE['modo_oscuro']) ? $_COOKIE['modo_oscuro'] : '
 
         .pedido-item.dark-mode p {
             color: #ccc;
-            /* Color de texto gris claro en modo oscuro */
+         
         }
 
         .dark-mode {
-    background-color: #333; /* Color de fondo oscuro */
-    color: #fff; /* Texto blanco */
-    /* Agrega otros estilos específicos de modo oscuro según tus necesidades */
+    background-color: #333; 
+    color: #fff;
+   
 }
     </style>
 </head>

@@ -51,7 +51,7 @@ td {
     margin-top: 10px;
     text-align: center;
     border: 0px;
-    background-color: #000000;
+    background-color: rgb(19, 18, 18);
 }
 
 .modal-content p {
@@ -78,11 +78,12 @@ td {
 }
 
 .modal-content dark-mode{
-    background-color: black;
+    background-color: rgb(19, 18, 18);
 }
 
 #modal {
-    background-color: black;
+    background-color: rgb(19, 18, 18);
+
 }
 
 body {
@@ -100,9 +101,8 @@ body.dark-mode {
     background-color: #333;
     color: #fff;
 }
-.modal-content.dark-mode {
-background-color: black;
-}
+
+
 .modal-delete {
     display: none;
     position: fixed;
@@ -125,6 +125,13 @@ background-color: black;
     text-align: center;
     position: relative;
 
+}
+
+
+
+
+.dark{
+ color:black;
 }
 
 .close-delete {
