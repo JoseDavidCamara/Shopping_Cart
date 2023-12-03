@@ -73,16 +73,15 @@ class Product
 
 function arrayClass($fNombre = null, $fMaxP = null, $fMinP = null)
 {
-    //The first step is get the list from ProductosDao();
+    //Obtiene el resultado de la consulta
     $consulta = devolver_productos($fNombre, $fMaxP, $fMinP);
     $listProductoClases = [];
 
-    //Iterate through the list to get the values of each product and add it to a new Class
     //Pasa el resultado de la consulta a una lista de la clase producto
     while ($registro = $consulta->fetch()) {
         $product = new Product($registro['id_producto'], $registro['nombre_producto'], $registro['descripcion'], $registro['precio'],1, $registro['url_imagen']);
         array_push($listProductoClases, $product);
     }
-    //return the new list with the classes
+    //return a la lista de la clase
     return $listProductoClases;
 }

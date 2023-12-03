@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 29-11-2023 a las 18:05:43
+-- Tiempo de generación: 03-12-2023 a las 17:59:35
 -- Versión del servidor: 10.4.28-MariaDB
 -- Versión de PHP: 8.2.4
 
@@ -38,11 +38,12 @@ CREATE TABLE `pedidos` (
 --
 
 INSERT INTO `pedidos` (`id_pedido`, `id_usuario`, `fecha_pedido`) VALUES
-(2, 1, '2023-11-28 21:23:19'),
-(3, 1, '2023-11-28 21:24:52'),
-(4, 1, '2023-11-28 21:31:33'),
-(5, 1, '2023-11-29 13:39:26'),
-(6, 2, '2023-11-29 16:52:30');
+(15, 1, '2023-12-01 15:47:23'),
+(16, 1, '2023-12-01 22:35:44'),
+(17, 1, '2023-12-01 23:08:52'),
+(18, 1, '2023-12-01 23:13:13'),
+(19, 1, '2023-12-02 18:03:44'),
+(20, 1, '2023-12-03 16:51:43');
 
 -- --------------------------------------------------------
 
@@ -61,18 +62,18 @@ CREATE TABLE `pedidos_productos` (
 --
 
 INSERT INTO `pedidos_productos` (`id_pedido`, `id_producto`, `cantidad`) VALUES
-(2, 2, 1),
-(2, 3, 1),
-(3, 1, 1),
-(3, 2, 1),
-(3, 3, 1),
-(4, 1, 1),
-(4, 2, 1),
-(4, 4, 1),
-(5, 2, 2),
-(6, 1, 1),
-(6, 2, 1),
-(6, 3, 1);
+(15, 5, 1),
+(15, 6, 1),
+(16, 1, 1),
+(16, 2, 1),
+(16, 3, 1),
+(17, 2, 4),
+(17, 3, 1),
+(18, 3, 1),
+(19, 2, 2),
+(19, 5, 1),
+(20, 1, 2),
+(20, 2, 1);
 
 -- --------------------------------------------------------
 
@@ -93,10 +94,12 @@ CREATE TABLE `productos` (
 --
 
 INSERT INTO `productos` (`id_producto`, `nombre_producto`, `descripcion`, `precio`, `url_imagen`) VALUES
-(1, 'Coche', 'Ferrai Verde', 2000.00, NULL),
-(2, 'Ordenador', 'Dell cross HP', 250.00, NULL),
-(3, 'Nave Espacial', 'Blanca con la punta negra.', 504.00, NULL),
-(4, 'Teclado', 'Gaming', 21.00, NULL);
+(1, 'Coche', 'Ferrari Verde', 20000.00, 'lamboverde.avif'),
+(2, 'Ordenador', 'Dell-i4 42100', 750.00, 'ordenador.jpg'),
+(3, 'Nave Espacial', 'Blanca con la punta azul.', 504.00, 'naveEspacial.jpg'),
+(4, 'Teclado', 'Gaming + RGB++', 21.00, 'teclado.jpg'),
+(5, 'Cafetera', 'Cafetera de capsulas', 43.00, 'cafetera.jpg'),
+(6, 'Nuggets', 'Nuggets de dinosaurio', 12.00, 'nuggets-de-pollo.jpg');
 
 -- --------------------------------------------------------
 
@@ -158,13 +161,13 @@ ALTER TABLE `usuarios`
 -- AUTO_INCREMENT de la tabla `pedidos`
 --
 ALTER TABLE `pedidos`
-  MODIFY `id_pedido` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
+  MODIFY `id_pedido` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=21;
 
 --
 -- AUTO_INCREMENT de la tabla `productos`
 --
 ALTER TABLE `productos`
-  MODIFY `id_producto` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+  MODIFY `id_producto` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
 
 --
 -- AUTO_INCREMENT de la tabla `usuarios`
